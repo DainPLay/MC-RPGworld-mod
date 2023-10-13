@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "rpgworldmod:rie_stairs",
+    "rpgworldmod:maskonite_stairs",
+    "rpgworldmod:maskonite_brick_stairs"
+  ]
+}

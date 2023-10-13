@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "rpgworldmod:rie_sapling",
+    "rpgworldmod:rie_slab",
+    "rpgworldmod:rie_fence",
+    "rpgworldmod:rie_stairs",
+    "rpgworldmod:rie_button",
+    "rpgworldmod:rie_pressure_plate",
+    "rpgworldmod:rie_door",
+    "rpgworldmod:rie_trapdoor",
+    "rpgworldmod:rie_slab",
+    "rpgworldmod:rie_fence_gate",
+    "rpgworldmod:rpgirolle",
+    "rpgworldmod:shiveralis",
+    "rpgworldmod:projectruffle"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:stone_pickaxe"
+  },
+  "addition": {
+    "item": "rpgworldmod:maskonite_block"
+  },
+  "result": {
+    "item": "rpgworldmod:maskonite_pickaxe"
+  }
+}

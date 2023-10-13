@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "rpgworldmod:maskonite_block",
+    "rpgworldmod:maskonite_stairs",
+    "rpgworldmod:maskonite_slab",
+    "rpgworldmod:maskonite_wall",
+    "rpgworldmod:maskonite_pressure_plate",
+    "rpgworldmod:chiseled_maskonite_block",
+    "rpgworldmod:maskonite_bricks",
+    "rpgworldmod:maskonite_brick_stairs",
+    "rpgworldmod:maskonite_brick_slab",
+    "rpgworldmod:maskonite_brick_wall",
+    "rpgworldmod:cracked_maskonite_bricks"
+  ]
+}

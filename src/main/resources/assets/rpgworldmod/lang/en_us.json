@@ -1,0 +1,58 @@
+{
+  "item.rpgworldmod.maskonite_sword": "Maskonite Sword",
+  "item.rpgworldmod.maskonite_pickaxe": "Maskonite Pickaxe",
+  "item.rpgworldmod.maskonite_axe": "Maskonite Axe",
+  "item.rpgworldmod.maskonite_shovel": "Maskonite Shovel",
+  "item.rpgworldmod.maskonite_hoe": "Maskonite Hoe",
+
+  "item.rpgworldmod.shiveralis_berries": "Shiveralis Berries",
+  "item.rpgworldmod.rie_fruit": "Rie",
+  "item.rpgworldmod.rpgirolle_item": "RPGirolle",
+  "item.rpgworldmod.projectruffle_item": "Projectruffle",
+
+  "block.rpgworldmod.maskonite_block": "Maskonite",
+  "block.rpgworldmod.maskonite_stairs": "Maskonite Stairs",
+  "block.rpgworldmod.maskonite_slab": "Maskonite Slab",
+  "block.rpgworldmod.maskonite_wall": "Maskonite Wall",
+  "block.rpgworldmod.maskonite_button": "Maskonite Button",
+  "block.rpgworldmod.maskonite_pressure_plate": "Maskonite Pressure Plate",
+  "block.rpgworldmod.maskonite_bricks": "Maskonite Bricks",
+  "block.rpgworldmod.maskonite_brick_stairs": "Maskonite Brick Stairs",
+  "block.rpgworldmod.maskonite_brick_slab": "Maskonite Brick Slab",
+  "block.rpgworldmod.maskonite_brick_wall": "Maskonite Brick Wall",
+  "block.rpgworldmod.cracked_maskonite_bricks": "Cracked Maskonite Bricks",
+  "block.rpgworldmod.chiseled_maskonite_block": "Chiseled Maskonite",
+  "block.rpgworldmod.maskonite_glass": "Maskonite Glass",
+  "block.rpgworldmod.maskonite_glass_pane": "Maskonite Glass Pane",
+
+  "block.rpgworldmod.rie_log": "Rie Log",
+  "block.rpgworldmod.rie_planks": "Rie Planks",
+  "block.rpgworldmod.rie_wood": "Rie Wood",
+  "block.rpgworldmod.stripped_rie_log": "Stripped Rie Log",
+  "block.rpgworldmod.stripped_rie_wood": "Stripped Rie Wood",
+  "block.rpgworldmod.rie_leaves": "Rie Leaves",
+  "block.rpgworldmod.rie_sapling": "Rie Sapling",
+  "block.rpgworldmod.rie_slab": "Rie Slab",
+  "block.rpgworldmod.rie_stairs": "Rie Stairs",
+  "block.rpgworldmod.rie_fence": "Rie Fence",
+  "block.rpgworldmod.rie_fence_gate": "Rie Fence Gate",
+  "block.rpgworldmod.rie_door": "Rie Door",
+  "block.rpgworldmod.rie_trapdoor": "Rie Trapdoor",
+  "block.rpgworldmod.rie_button": "Rie Button",
+  "block.rpgworldmod.rie_pressure_plate": "Rie Pressure Plate",
+  
+  "block.rpgworldmod.shiveralis": "Shiveralis",
+  "block.rpgworldmod.potted_shiveralis": "Potted Shiveralis",
+  "block.rpgworldmod.rpgirolle": "RPGirolle",
+  "block.rpgworldmod.potted_rpgirolle": "Potted RPGirolle",
+  "block.rpgworldmod.projectruffle": "Projectruffle Cluster",
+  "block.rpgworldmod.potted_projectruffle": "Potted Projectruffle",
+  "block.rpgworldmod.potted_rie_sapling": "Potted Rie Sapling",
+  "block.rpgworldmod.widoweed": "Widoweed",
+
+  "entity.rpgworldmod.projectruffle": "Projectruffle",
+
+  "biome.rpgworldmod.rie_weald": "Rie Weald",
+
+  "itemGroup.rpgworldtab": "RPGworld"
+}
