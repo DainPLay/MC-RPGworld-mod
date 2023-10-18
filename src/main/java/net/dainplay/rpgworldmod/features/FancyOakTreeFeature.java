@@ -2,6 +2,7 @@ package net.dainplay.rpgworldmod.features;
 
 import com.google.common.collect.ImmutableList;
 import net.dainplay.rpgworldmod.block.ModBlocks;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -9,6 +10,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -35,7 +37,7 @@ public class FancyOakTreeFeature {
                 .add(SurfaceWaterDepthFilter.forMaxDepth(0))
                 .add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR)
                 .add(PlacementUtils.HEIGHTMAP_WORLD_SURFACE)
-                .add(TREE_THRESHOLD)
+                .add(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK), new BlockPos(0, -1, 0))))
                 .add(BiomeFilter.biome());
     }
 

@@ -30,8 +30,7 @@ public class ColorHandler
         event.getItemColors().register((stack, tintIndex) -> {
                     BlockState state = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
                     return event.getBlockColors().getColor(state, null, null, tintIndex); },
-                ModBlocks.WIDOWEED.get(),
-                ModBlocks.RIE_LEAVES.get());
+                ModBlocks.WIDOWEED.get(), ModBlocks.RIE_LEAVES.get());
     }
 
     @SubscribeEvent
@@ -40,7 +39,7 @@ public class ColorHandler
         //Grass Coloring
         event.getBlockColors().register((state, world, pos, tintIndex) ->
                         world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.get(0.5D, 1.0D),
-                ModBlocks.WIDOWEED.get());
+                ModBlocks.WIDOWEED.get(), ModBlocks.HOLTS_REFLECTION.get());
 
         //Foliage Coloring
         event.getBlockColors().register((state, world, pos, tintIndex) ->

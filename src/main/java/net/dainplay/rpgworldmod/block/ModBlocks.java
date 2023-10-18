@@ -1,13 +1,16 @@
 package net.dainplay.rpgworldmod.block;
 
 import net.dainplay.rpgworldmod.RPGworldMod;
+import net.dainplay.rpgworldmod.block.custom.HoltsReflectionBlock;
 import net.dainplay.rpgworldmod.block.custom.ModFlammableRotatedPillarBlock;
 import net.dainplay.rpgworldmod.block.custom.ShiveralisPlantBlock;
+import net.dainplay.rpgworldmod.block.custom.WidoweedBlock;
 import net.dainplay.rpgworldmod.world.feature.tree.RieTreeGrower;
 import net.dainplay.rpgworldmod.item.ModCreativeModeTab;
 import net.dainplay.rpgworldmod.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -18,9 +21,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -77,8 +83,10 @@ public class ModBlocks {
                     return SHAPE;
                 }
             }, ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> HOLTS_REFLECTION = registerBlock("holts_reflection",
+            () -> new HoltsReflectionBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()), ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> WIDOWEED = registerBlock("widoweed",
-            () -> new TallGrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noOcclusion()), ModCreativeModeTab.RPGWORLD_TAB);
+            () -> new WidoweedBlock(BlockBehaviour.Properties.of(Material.GRASS).noCollission().randomTicks().strength(0.2F).sound(SoundType.GRASS)), ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> POTTED_PROJECTRUFFLE = registerBlockWithoutBlockItem("potted_projectruffle",
             () -> new FlowerPotBlock(ModBlocks.PROJECTRUFFLE.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
 
@@ -149,7 +157,7 @@ public class ModBlocks {
                     return 5;
                 }
             }, ModCreativeModeTab.RPGWORLD_TAB);
-    public static final RegistryObject<Block> RIE_FENCE = registerBlock("rie_fence",
+    public static final RegistryObject<Block> RIE_FENCE = registerFuelBlock("rie_fence",
             () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)) {
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
@@ -165,12 +173,8 @@ public class ModBlocks {
                 public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
                     return 5;
                 }
-
-                public int getBurnTime(ItemStack itemstack, @Nullable RecipeType<?> recipeType) {
-                    return 600;
-                }
-            }, ModCreativeModeTab.RPGWORLD_TAB);
-    public static final RegistryObject<FenceGateBlock> RIE_FENCE_GATE = registerBlock("rie_fence_gate",
+            }, ModCreativeModeTab.RPGWORLD_TAB, 300);
+    public static final RegistryObject<Block> RIE_FENCE_GATE = registerFuelBlock("rie_fence_gate",
             () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE)) {
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
@@ -186,9 +190,10 @@ public class ModBlocks {
                 public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
                     return 5;
                 }
-            }, ModCreativeModeTab.RPGWORLD_TAB);
+            }, ModCreativeModeTab.RPGWORLD_TAB, 300);
+
     public static final RegistryObject<Block> RIE_BUTTON = registerBlock("rie_button",
-            () -> new StoneButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.RPGWORLD_TAB);
+            () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> RIE_PRESSURE_PLATE = registerBlock("rie_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)), ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> RIE_DOOR = registerBlock("rie_door",
@@ -225,6 +230,17 @@ public class ModBlocks {
     public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn, tab);
+        return toReturn;
+    }
+    public static <T extends Block> RegistryObject<T> registerFuelBlock(String name, Supplier<T> block, CreativeModeTab tab, int burntime) {
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        ModItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties().tab(tab)) {
+            @Override
+            public int getBurnTime(ItemStack itemstack, @Nullable RecipeType<?> recipeType)
+            {
+                return burntime;
+            }
+        });
         return toReturn;
     }
     public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {

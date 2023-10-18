@@ -25,5 +25,13 @@ public class RPGworldRegionProvider extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper)
     {
         this.addBiomeSimilar(mapper, Biomes.DARK_FOREST, BiomeInitializer.RIE_WEALD);
+        this.addBiomeSimilar(mapper, Biomes.DESERT, Biomes.DESERT);
+        this.addBiomeSimilar(mapper, Biomes.PLAINS, Biomes.PLAINS);
+        this.addBiomeSimilar(mapper, Biomes.FOREST, Biomes.FOREST);
+        this.addBiomeSimilar(mapper, Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_HILLS);
+        this.addBiomeSimilar(mapper, Biomes.OCEAN, Biomes.OCEAN);
+        this.addBiomeSimilar(mapper, Biomes.COLD_OCEAN, Biomes.COLD_OCEAN);
+        this.addBiomeSimilar(mapper, Biomes.WARM_OCEAN, Biomes.WARM_OCEAN);
+        this.addBiomeSimilar(mapper, Biomes.RIVER, Biomes.RIVER);
     }
 }

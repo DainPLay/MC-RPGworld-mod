@@ -1,5 +1,6 @@
 package net.dainplay.rpgworldmod.world.gen;
 
+import net.dainplay.rpgworldmod.biome.BiomeInitializer;
 import net.dainplay.rpgworldmod.world.feature.ModPlacedFeatures;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -25,6 +26,13 @@ public class ModFlowerGeneration {
                     event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
 
             base.add(ModPlacedFeatures.RPGIROLLE_PLACED);
+        }
+
+        if(key == BiomeInitializer.RIE_WEALD) {
+            List<Holder<PlacedFeature>> base =
+                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
+
+            base.add(ModPlacedFeatures.RIE_FLOWER_PLACED);
         }
     }
 }

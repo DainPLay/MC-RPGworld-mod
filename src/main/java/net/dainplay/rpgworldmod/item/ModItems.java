@@ -2,17 +2,12 @@ package net.dainplay.rpgworldmod.item;
 
 import net.dainplay.rpgworldmod.RPGworldMod;
 import net.dainplay.rpgworldmod.block.ModBlocks;
-import net.dainplay.rpgworldmod.item.custom.FurnaceFuelItem;
 import net.dainplay.rpgworldmod.item.custom.ProjectruffleArrowItem;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.Objects;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -38,16 +33,5 @@ public class ModItems {
             () -> new ProjectruffleArrowItem(new Item.Properties().tab(ModCreativeModeTab.RPGWORLD_TAB)));
     public static void register(IEventBus eventbus) {
         ITEMS.register(eventbus);
-    }
-    public static void registerBlockItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(burningItem(ModBlocks.RIE_FENCE, 300));
-        event.getRegistry().register(burningItem(ModBlocks.RIE_FENCE_GATE, 300));
-    }
-    private static <B extends Block> Item burningItem(RegistryObject<B> block, int burntime) {
-        return makeBlockItem(new FurnaceFuelItem(block.get(), new Item.Properties().tab(ModCreativeModeTab.RPGWORLD_TAB), burntime), block);
-    }
-
-    private static Item makeBlockItem(Item blockitem, RegistryObject<? extends Block> block) {
-        return blockitem.setRegistryName(Objects.requireNonNull(block.getId()));
     }
 }

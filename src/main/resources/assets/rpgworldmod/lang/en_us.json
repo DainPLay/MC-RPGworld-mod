@@ -49,10 +49,15 @@
   "block.rpgworldmod.potted_projectruffle": "Potted Projectruffle",
   "block.rpgworldmod.potted_rie_sapling": "Potted Rie Sapling",
   "block.rpgworldmod.widoweed": "Widoweed",
+  "block.rpgworldmod.holts_reflection": "Holt's Reflection",
+  "block.rpgworldmod.potted_holts_reflection": "Potted Holt's Reflection",
 
   "entity.rpgworldmod.projectruffle": "Projectruffle",
 
   "biome.rpgworldmod.rie_weald": "Rie Weald",
+
+  "death.attack.widoweed": "%1$s was consumed by widoweed",
+  "death.attack.widoweed.player": "%1$s was consumed by widoweed whilst trying to escape %2$s",
 
   "itemGroup.rpgworldtab": "RPGworld"
 }

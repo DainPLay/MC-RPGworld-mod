@@ -6,7 +6,7 @@ public class ColorConstants {
 
     public static final int STANDARD_WATERFOG = 0x050533;
 
-    public static int RIE_WEALD_FOLIAGE_COLOR = 0x20AC6E;
+    public static int RIE_WEALD_FOLIAGE_COLOR = 0x3EB261;
 
     public static int RIE_WEALD_GRASS_COLOR = 0x20AC6E;
 

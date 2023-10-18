@@ -49,8 +49,13 @@
   "block.rpgworldmod.potted_projectruffle": "Стрюфель в горшке",
   "block.rpgworldmod.potted_rie_sapling": "Саженец рии в горшке",
   "block.rpgworldmod.widoweed": "Трава-морава",
+  "block.rpgworldmod.holts_reflection": "Лесное зеркало",
+  "block.rpgworldmod.potted_holts_reflection": "Лесное зеркало в горшке",
 
   "biome.rpgworldmod.rie_weald": "Рийская дубрава",
+
+  "death.attack.widoweed": "%1$s был поглощён травой-моравой",
+  "death.attack.widoweed.player": "%1$s был поглощён травой-моравой, пытаясь убежать от %2$s",
 
   "itemGroup.rpgworldtab": "RPGworld"
 }
