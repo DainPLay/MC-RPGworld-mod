@@ -3,7 +3,7 @@ package net.dainplay.rpgworldmod.world.feature;
 import com.google.common.collect.ImmutableList;
 import net.dainplay.rpgworldmod.block.ModBlocks;
 import net.dainplay.rpgworldmod.block.custom.HoltsReflectionBlock;
-import net.dainplay.rpgworldmod.util.RandomDirection;
+import net.dainplay.rpgworldmod.features.SpikyIvyFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -55,16 +55,6 @@ public class ModConfiguredFeatures {
             FeatureUtils.register("rie_spawn", Feature.RANDOM_SELECTOR,
                     new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(RIE_CHECKED,
                             0.5F)), RIE_CHECKED));
-    //public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> TROVER =
-    //        FeatureUtils.register("flower_trover", Feature.FLOWER,
-      //              new RandomPatchConfiguration(32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-        //                    new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.TROVER.get())))));
-
-    //public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> SHIVERALIS =
-      //      FeatureUtils.register("flower_shiveralis", Feature.FLOWER,
-        //          new RandomPatchConfiguration(14, 4, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-          //              new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.SHIVERALIS.get())))));
-
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> SHIVERALIS =
             FeatureUtils.register("flower_shiveralis", Feature.RANDOM_PATCH,
                     FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
@@ -97,12 +87,13 @@ public class ModConfiguredFeatures {
                                     .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.EAST), 1)
                                     .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.WEST), 1))))));
 
-    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_GRASS_JUNGLE =
-            FeatureUtils.register("patch_grass_jungle", Feature.RANDOM_PATCH,
-                    new RandomPatchConfiguration(32, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK,
-                            new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.GRASS.defaultBlockState(), 3).add(Blocks.FERN.defaultBlockState(), 1))), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.not(BlockPredicate.matchesBlock(Blocks.PODZOL, new BlockPos(0, -1, 0)))))));
     public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> MASKONITE = FeatureUtils.register("maskonite", Feature.FOREST_ROCK, new BlockStateConfiguration(ModBlocks.MASKONITE_BLOCK.get().defaultBlockState()));
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RIE_BUSH = FeatureUtils.register("rie_bush", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(ModBlocks.RIE_LOG.get()), new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(ModBlocks.RIE_LEAVES.get()), new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2), new TwoLayersFeatureSize(0, 0, 0))).build());
+    public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> SPIKY_IVY = FeatureUtils.register("spiky_ivy", RPGFeatures.SPIKY_IVY, new BlockStateConfiguration(ModBlocks.SPIKY_IVY.get().defaultBlockState()));
+    public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> TREE_HOLLOW_WEST = FeatureUtils.register("tree_hollow_west", RPGFeatures.TREE_HOLLOW_WEST, new BlockStateConfiguration(ModBlocks.RIE_HOLLOW.get().defaultBlockState()));
+    public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> TREE_HOLLOW_EAST = FeatureUtils.register("tree_hollow_east", RPGFeatures.TREE_HOLLOW_EAST, new BlockStateConfiguration(ModBlocks.RIE_HOLLOW.get().defaultBlockState()));
+    public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> TREE_HOLLOW_NORTH = FeatureUtils.register("tree_hollow_north", RPGFeatures.TREE_HOLLOW_NORTH, new BlockStateConfiguration(ModBlocks.RIE_HOLLOW.get().defaultBlockState()));
+    public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> TREE_HOLLOW_SOUTH = FeatureUtils.register("tree_hollow_south", RPGFeatures.TREE_HOLLOW_SOUTH, new BlockStateConfiguration(ModBlocks.RIE_HOLLOW.get().defaultBlockState()));
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_MOSS_RIE = FeatureUtils.register("patch_moss_rie", Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.MOSS_CARPET.defaultBlockState(), 3).add(ModBlocks.WIDOWEED.get().defaultBlockState(), 1))), BlockPredicate.allOf(BlockPredicate.matchesBlock(Blocks.AIR, BlockPos.ZERO), BlockPredicate.allOf(BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.MOSSY_COBBLESTONE, ModBlocks.MASKONITE_BLOCK.get()), new BlockPos(0, -1, 0)))))));
 
 }

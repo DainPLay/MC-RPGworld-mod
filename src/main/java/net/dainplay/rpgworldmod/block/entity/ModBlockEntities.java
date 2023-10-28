@@ -4,6 +4,8 @@ import com.mojang.datafixers.types.Type;
 import net.dainplay.rpgworldmod.RPGworldMod;
 import net.dainplay.rpgworldmod.block.ModBlocks;
 import net.dainplay.rpgworldmod.block.entity.custom.HoltsReflectionBlockEntity;
+import net.dainplay.rpgworldmod.block.entity.custom.ModSignBlockEntity;
+import net.dainplay.rpgworldmod.block.entity.custom.TreeHollowBlockEntity;
 import net.minecraft.Util;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
@@ -29,6 +31,11 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<HoltsReflectionBlockEntity>> HOLTS_REFLECTION_BLOCK_ENTITY = BLOCK_ENTITIES.register("holts_reflection_block_entity", () ->
             BlockEntityType.Builder.of(HoltsReflectionBlockEntity::new, ModBlocks.HOLTS_REFLECTION.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<TreeHollowBlockEntity>> TREE_HOLLOW_BLOCK_ENTITY = BLOCK_ENTITIES.register("tree_hollow_block_entity", () ->
+            BlockEntityType.Builder.of(TreeHollowBlockEntity::new, ModBlocks.RIE_HOLLOW.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> SIGN_BLOCK_ENTITIES = BLOCK_ENTITIES.register("sign_block_entity", () ->
+            BlockEntityType.Builder.of(ModSignBlockEntity::new, ModBlocks.RIE_WALL_SIGN.get(),ModBlocks.RIE_SIGN.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

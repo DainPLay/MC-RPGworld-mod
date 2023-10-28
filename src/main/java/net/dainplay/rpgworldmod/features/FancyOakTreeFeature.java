@@ -3,12 +3,15 @@ package net.dainplay.rpgworldmod.features;
 import com.google.common.collect.ImmutableList;
 import net.dainplay.rpgworldmod.block.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -26,7 +29,10 @@ import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.Random;
+import java.util.function.BiConsumer;
 
+import static net.dainplay.rpgworldmod.block.custom.TreeHollowBlock.FACING;
 import static net.minecraft.data.worldgen.placement.VegetationPlacements.TREE_THRESHOLD;
 
 public class FancyOakTreeFeature {

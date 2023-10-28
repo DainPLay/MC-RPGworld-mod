@@ -1,0 +1,468 @@
+{
+  "variants": {
+    "north=none,east=none,south=none,west=none,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_0"
+    },
+    "east=none,south=none,west=none,north=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1"
+    },
+    "north=none,south=none,west=none,east=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i"
+    },
+    "north=none,south=none,east=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l"
+    },
+    "south=none,west=none,north=low,east=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3"
+    },
+    "west=none,north=low,east=low,south=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=true,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_4"
+    },
+    "north=none,east=none,south=none,west=none,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_0_airborn"
+    },
+    "east=none,south=none,west=none,north=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn"
+    },
+    "north=none,south=none,west=none,east=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn"
+    },
+    "north=none,south=none,east=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn"
+    },
+    "south=none,west=none,north=low,east=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn"
+    },
+    "west=none,north=low,east=low,south=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=false,age=3": {
+      "model": "rpgworldmod:block/spiky_ivy_4_airborn"
+    },
+    "north=none,east=none,south=none,west=none,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_0"
+    },
+    "east=none,south=none,west=none,north=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1"
+    },
+    "north=none,south=none,west=none,east=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i"
+    },
+    "north=none,south=none,east=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l"
+    },
+    "south=none,west=none,north=low,east=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3"
+    },
+    "west=none,north=low,east=low,south=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=true,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_4"
+    },
+    "north=none,east=none,south=none,west=none,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_0_airborn"
+    },
+    "east=none,south=none,west=none,north=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn"
+    },
+    "north=none,south=none,west=none,east=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn"
+    },
+    "north=none,south=none,east=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn"
+    },
+    "south=none,west=none,north=low,east=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn"
+    },
+    "west=none,north=low,east=low,south=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=false,age=2": {
+      "model": "rpgworldmod:block/spiky_ivy_4_airborn"
+    },
+    "north=none,east=none,south=none,west=none,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_0"
+    },
+    "east=none,south=none,west=none,north=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1"
+    },
+    "north=none,south=none,west=none,east=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i"
+    },
+    "north=none,south=none,east=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l"
+    },
+    "south=none,west=none,north=low,east=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3"
+    },
+    "west=none,north=low,east=low,south=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=true,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_4"
+    },
+    "north=none,east=none,south=none,west=none,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_0_airborn"
+    },
+    "east=none,south=none,west=none,north=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn"
+    },
+    "north=none,south=none,west=none,east=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn"
+    },
+    "north=none,south=none,east=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn"
+    },
+    "south=none,west=none,north=low,east=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn"
+    },
+    "west=none,north=low,east=low,south=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=false,age=1": {
+      "model": "rpgworldmod:block/spiky_ivy_4_airborn"
+    },
+    "north=none,east=none,south=none,west=none,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_0"
+    },
+    "east=none,south=none,west=none,north=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1"
+    },
+    "north=none,south=none,west=none,east=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i"
+    },
+    "north=none,south=none,east=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l"
+    },
+    "south=none,west=none,north=low,east=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3"
+    },
+    "west=none,north=low,east=low,south=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=true,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_4"
+    },
+    "north=none,east=none,south=none,west=none,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_0_airborn"
+    },
+    "east=none,south=none,west=none,north=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn"
+    },
+    "north=none,south=none,west=none,east=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 90
+    },
+    "north=none,east=none,west=none,south=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=none,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_1_airborn",
+      "y": 270
+    },
+    "east=none,west=none,north=low,south=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn"
+    },
+    "north=none,south=none,east=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_i_airborn",
+      "y": 90
+    },
+    "east=none,south=none,north=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn"
+    },
+    "south=none,west=none,north=low,east=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 90
+    },
+    "north=none,west=none,east=low,south=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 180
+    },
+    "north=none,east=none,south=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_2_l_airborn",
+      "y": 270
+    },
+    "south=none,north=low,east=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn"
+    },
+    "west=none,north=low,east=low,south=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 90
+    },
+    "north=none,east=low,south=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 180
+    },
+    "east=none,north=low,south=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_3_airborn",
+      "y": 270
+    },
+    "north=low,east=low,south=low,west=low,bottom=false,age=0": {
+      "model": "rpgworldmod:block/spiky_ivy_4_airborn"
+    }
+  }
+}

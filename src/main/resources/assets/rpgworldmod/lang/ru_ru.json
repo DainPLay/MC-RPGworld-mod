@@ -9,6 +9,7 @@
   "item.rpgworldmod.rie_fruit": "Рия",
   "item.rpgworldmod.rpgirolle_item": "РПГриб",
   "item.rpgworldmod.projectruffle_item": "Стрюфель",
+  "item.rpgworldmod.rie_boat": "Рийская лодка",
 
   "block.rpgworldmod.maskonite_block": "Масконит",
   "block.rpgworldmod.maskonite_stairs": "Масконитовые ступеньки",
@@ -30,6 +31,7 @@
   "block.rpgworldmod.rie_wood": "Рийская древесина",
   "block.rpgworldmod.stripped_rie_log": "Обтёсанное рийское бревно",
   "block.rpgworldmod.stripped_rie_wood": "Обтёсанная рийская древесина",
+  "block.rpgworldmod.rie_hollow": "Рийское дупло",
   "block.rpgworldmod.rie_leaves": "Рийские листья",
   "block.rpgworldmod.rie_sapling": "Саженец рии",
   "block.rpgworldmod.rie_slab": "Рийская плита",
@@ -40,7 +42,8 @@
   "block.rpgworldmod.rie_trapdoor": "Рийский люк",
   "block.rpgworldmod.rie_button": "Рийская кнопка",
   "block.rpgworldmod.rie_pressure_plate": "Рийская нажимная плита",
-  
+  "block.rpgworldmod.rie_sign": "Рийская табличка",
+
   "block.rpgworldmod.shiveralis": "Трусянка",
   "block.rpgworldmod.potted_shiveralis": "Трусянка в горшке",
   "block.rpgworldmod.rpgirolle": "РПГриб",
@@ -50,12 +53,17 @@
   "block.rpgworldmod.potted_rie_sapling": "Саженец рии в горшке",
   "block.rpgworldmod.widoweed": "Трава-морава",
   "block.rpgworldmod.holts_reflection": "Лесное зеркало",
-  "block.rpgworldmod.potted_holts_reflection": "Лесное зеркало в горшке",
+  "block.rpgworldmod.spiky_ivy": "Колкий плющ",
+
+  "entity.rpgworldmod.projectruffle": "Стрюфель",
+  "entity.rpgworldmod.modboat": "Лодка",
 
   "biome.rpgworldmod.rie_weald": "Рийская дубрава",
 
   "death.attack.widoweed": "%1$s был поглощён травой-моравой",
   "death.attack.widoweed.player": "%1$s был поглощён травой-моравой, пытаясь убежать от %2$s",
+  "death.attack.spiky_ivy": "%1$s закололся до смерти",
+  "death.attack.spiky_ivy.player": "%1$s наткнулся на колкий плющ, пытаясь убежать от %2$s",
 
   "itemGroup.rpgworldtab": "RPGworld"
 }

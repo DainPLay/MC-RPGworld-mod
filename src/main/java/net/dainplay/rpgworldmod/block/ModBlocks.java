@@ -1,10 +1,8 @@
 package net.dainplay.rpgworldmod.block;
 
 import net.dainplay.rpgworldmod.RPGworldMod;
-import net.dainplay.rpgworldmod.block.custom.HoltsReflectionBlock;
-import net.dainplay.rpgworldmod.block.custom.ModFlammableRotatedPillarBlock;
-import net.dainplay.rpgworldmod.block.custom.ShiveralisPlantBlock;
-import net.dainplay.rpgworldmod.block.custom.WidoweedBlock;
+import net.dainplay.rpgworldmod.block.custom.*;
+import net.dainplay.rpgworldmod.block.entity.ModWoodTypes;
 import net.dainplay.rpgworldmod.world.feature.tree.RieTreeGrower;
 import net.dainplay.rpgworldmod.item.ModCreativeModeTab;
 import net.dainplay.rpgworldmod.item.ModItems;
@@ -86,7 +84,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> HOLTS_REFLECTION = registerBlock("holts_reflection",
             () -> new HoltsReflectionBlock(BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()), ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> WIDOWEED = registerBlock("widoweed",
-            () -> new WidoweedBlock(BlockBehaviour.Properties.of(Material.GRASS).noCollission().randomTicks().strength(0.2F).sound(SoundType.GRASS)), ModCreativeModeTab.RPGWORLD_TAB);
+            () -> new WidoweedBlock(BlockBehaviour.Properties.of(Material.GRASS).noCollission().strength(0.2F).sound(SoundType.GRASS)),  ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> SPIKY_IVY = registerBlock("spiky_ivy",
+            () -> new SpikyIvyBlock(BlockBehaviour.Properties.of(Material.GRASS).randomTicks().strength(0.4F).sound(SoundType.WART_BLOCK)), ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> POTTED_SPIKY_IVY = registerBlockWithoutBlockItem("potted_spiky_ivy",
+            () -> new FlowerPotBlock(ModBlocks.SPIKY_IVY.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
     public static final RegistryObject<Block> POTTED_PROJECTRUFFLE = registerBlockWithoutBlockItem("potted_projectruffle",
             () -> new FlowerPotBlock(ModBlocks.PROJECTRUFFLE.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
 
@@ -102,6 +104,9 @@ public class ModBlocks {
             ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> STRIPPED_RIE_WOOD = registerBlock("stripped_rie_wood",
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)),
+            ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> RIE_HOLLOW = registerBlock("rie_hollow",
+            () -> new TreeHollowBlock(BlockBehaviour.Properties.copy(Blocks.JUKEBOX)),
             ModCreativeModeTab.RPGWORLD_TAB);
 
 
@@ -223,6 +228,10 @@ public class ModBlocks {
             () -> new SaplingBlock(new RieTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)), ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> POTTED_RIE_SAPLING = registerBlockWithoutBlockItem("potted_rie_sapling",
             () -> new FlowerPotBlock(ModBlocks.RIE_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_OAK_SAPLING).noOcclusion()));
+    public static final RegistryObject<Block> RIE_WALL_SIGN = registerBlockWithoutBlockItem("rie_wall_sign",
+            () -> new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.RIE));
+    public static final RegistryObject<Block> RIE_SIGN = registerBlockWithoutBlockItem("rie_sign",
+            () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.RIE));
 
     public static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);

@@ -9,6 +9,7 @@
   "item.rpgworldmod.rie_fruit": "Rie",
   "item.rpgworldmod.rpgirolle_item": "RPGirolle",
   "item.rpgworldmod.projectruffle_item": "Projectruffle",
+  "item.rpgworldmod.rie_boat": "Rie Boat",
 
   "block.rpgworldmod.maskonite_block": "Maskonite",
   "block.rpgworldmod.maskonite_stairs": "Maskonite Stairs",
@@ -30,6 +31,7 @@
   "block.rpgworldmod.rie_wood": "Rie Wood",
   "block.rpgworldmod.stripped_rie_log": "Stripped Rie Log",
   "block.rpgworldmod.stripped_rie_wood": "Stripped Rie Wood",
+  "block.rpgworldmod.rie_hollow": "Rie Hollow",
   "block.rpgworldmod.rie_leaves": "Rie Leaves",
   "block.rpgworldmod.rie_sapling": "Rie Sapling",
   "block.rpgworldmod.rie_slab": "Rie Slab",
@@ -40,6 +42,7 @@
   "block.rpgworldmod.rie_trapdoor": "Rie Trapdoor",
   "block.rpgworldmod.rie_button": "Rie Button",
   "block.rpgworldmod.rie_pressure_plate": "Rie Pressure Plate",
+  "block.rpgworldmod.rie_sign": "Rie Sign",
   
   "block.rpgworldmod.shiveralis": "Shiveralis",
   "block.rpgworldmod.potted_shiveralis": "Potted Shiveralis",
@@ -50,14 +53,17 @@
   "block.rpgworldmod.potted_rie_sapling": "Potted Rie Sapling",
   "block.rpgworldmod.widoweed": "Widoweed",
   "block.rpgworldmod.holts_reflection": "Holt's Reflection",
-  "block.rpgworldmod.potted_holts_reflection": "Potted Holt's Reflection",
+  "block.rpgworldmod.spiky_ivy": "Spiky Ivy",
 
   "entity.rpgworldmod.projectruffle": "Projectruffle",
+  "entity.rpgworldmod.modboat": "Boat",
 
   "biome.rpgworldmod.rie_weald": "Rie Weald",
 
   "death.attack.widoweed": "%1$s was consumed by widoweed",
   "death.attack.widoweed.player": "%1$s was consumed by widoweed whilst trying to escape %2$s",
+  "death.attack.spiky_ivy": "%1$s was pricked to death",
+  "death.attack.spiky_ivy.player": "%1$s walked into spiky ivy whilst trying to escape %2$s",
 
   "itemGroup.rpgworldtab": "RPGworld"
 }

@@ -96,12 +96,17 @@ public class RPGworldBiomeDecorator {
 
         FancyOakTreeFeature.addFancyOakTrees(biomeFeatures);
         biomeFeatures.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIE_TREE_CHECKED);
-        biomeFeatures.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIE_BUSH);
         biomeFeatures.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.MASKONITE_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SHIVERALIS_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PROJECTRUFFLE_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.HOLTS_REFLECTION_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.RPGIROLLE_PLACED);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.RIE_BUSH);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SPIKY_IVY_PLACED);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.TREE_HOLLOW_WEST_PLACED);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.TREE_HOLLOW_EAST_PLACED);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.TREE_HOLLOW_NORTH_PLACED);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.TREE_HOLLOW_SOUTH_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.RIE_MOSS_PLACED);
 
         return biome(Biome.Precipitation.NONE, Biome.BiomeCategory.FOREST, 0.7F, 0.7F, ColorConstants.STANDARD_WATER, ColorConstants.STANDARD_WATERFOG, ColorConstants.RIE_WEALD_FOLIAGE_COLOR, ColorConstants.RIE_WEALD_GRASS_COLOR, spawnSettings, biomeFeatures);

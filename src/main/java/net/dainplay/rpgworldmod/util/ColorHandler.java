@@ -30,7 +30,7 @@ public class ColorHandler
         event.getItemColors().register((stack, tintIndex) -> {
                     BlockState state = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
                     return event.getBlockColors().getColor(state, null, null, tintIndex); },
-                ModBlocks.WIDOWEED.get(), ModBlocks.RIE_LEAVES.get());
+                ModBlocks.WIDOWEED.get(), ModBlocks.RIE_LEAVES.get(), ModBlocks.SPIKY_IVY.get());
     }
 
     @SubscribeEvent
@@ -39,18 +39,11 @@ public class ColorHandler
         //Grass Coloring
         event.getBlockColors().register((state, world, pos, tintIndex) ->
                         world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.get(0.5D, 1.0D),
-                ModBlocks.WIDOWEED.get(), ModBlocks.HOLTS_REFLECTION.get());
+                ModBlocks.WIDOWEED.get(), ModBlocks.HOLTS_REFLECTION.get(), ModBlocks.SPIKY_IVY.get(), ModBlocks.POTTED_SPIKY_IVY.get());
 
         //Foliage Coloring
         event.getBlockColors().register((state, world, pos, tintIndex) ->
                         world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
                 ModBlocks.RIE_LEAVES.get());
-    }
-
-    public static int getRainbowBirchColor(BlockAndTintGetter world, BlockPos pos)
-    {
-        Color foliage = Color.getHSBColor((((float)pos.getX() + Mth.sin(((float)pos.getZ() + (float)pos.getX()) / 35) * 35) % 150) / 150, 0.6F, 1.0F);
-
-        return foliage.getRGB();
     }
 }
