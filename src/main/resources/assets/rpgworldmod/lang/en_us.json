@@ -9,6 +9,11 @@
   "item.rpgworldmod.rie_fruit": "Rie",
   "item.rpgworldmod.rpgirolle_item": "RPGirolle",
   "item.rpgworldmod.projectruffle_item": "Projectruffle",
+  "item.rpgworldmod.fairapier_seed": "Fairapier Seed",
+  "item.rpgworldmod.fairapier_sword": "Fairapier",
+  "item.rpgworldmod.fairapier_sword.desc": "For overgrown fairies",
+  "item.rpgworldmod.fairapier_sword_wilted": "Fairapier",
+  "item.rpgworldmod.fairapier_sword_wilted.desc": "Wilted",
   "item.rpgworldmod.rie_boat": "Rie Boat",
 
   "block.rpgworldmod.maskonite_block": "Maskonite",
@@ -46,6 +51,10 @@
   
   "block.rpgworldmod.shiveralis": "Shiveralis",
   "block.rpgworldmod.potted_shiveralis": "Potted Shiveralis",
+  "block.rpgworldmod.wild_fairapier": "Wild Fairapier",
+  "block.rpgworldmod.potted_wild_fairapier": "Potted Wild Fairapier",
+  "block.rpgworldmod.fairapier_plant": "Fairapier",
+  "block.rpgworldmod.fairapier_wilted_plant": "Fairapier",
   "block.rpgworldmod.rpgirolle": "RPGirolle",
   "block.rpgworldmod.potted_rpgirolle": "Potted RPGirolle",
   "block.rpgworldmod.projectruffle": "Projectruffle Cluster",
@@ -55,8 +64,9 @@
   "block.rpgworldmod.holts_reflection": "Holt's Reflection",
   "block.rpgworldmod.spiky_ivy": "Spiky Ivy",
 
-  "entity.rpgworldmod.projectruffle": "Projectruffle",
+  "entity.rpgworldmod.projectruffle_arrow": "Projectruffle",
   "entity.rpgworldmod.modboat": "Boat",
+  "entity.rpgworldmod.fairapier_seed_projectile": "Thrown Fairapier Seed",
 
   "biome.rpgworldmod.rie_weald": "Rie Weald",
 
@@ -64,6 +74,8 @@
   "death.attack.widoweed.player": "%1$s was consumed by widoweed whilst trying to escape %2$s",
   "death.attack.spiky_ivy": "%1$s was pricked to death",
   "death.attack.spiky_ivy.player": "%1$s walked into spiky ivy whilst trying to escape %2$s",
+  "death.attack.fairapier_seed": "%1$s was seeded away by %2$s",
+  "death.attack.fairapier_seed.item": "%1$s was seeded away by %2$s using %3$s",
 
   "itemGroup.rpgworldtab": "RPGworld"
 }

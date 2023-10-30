@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -48,10 +49,10 @@ import java.util.Random;
 public class SpikyIvyBlock extends Block implements BonemealableBlock {
     private final Map<BlockState, VoxelShape> shapeByIndex;
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
-    public static final EnumProperty<WallSide> EAST_IVY = BlockStateProperties.EAST_WALL;
-    public static final EnumProperty<WallSide> NORTH_IVY = BlockStateProperties.NORTH_WALL;
-    public static final EnumProperty<WallSide> SOUTH_IVY = BlockStateProperties.SOUTH_WALL;
-    public static final EnumProperty<WallSide> WEST_IVY = BlockStateProperties.WEST_WALL;
+    public static final BooleanProperty EAST_IVY = BooleanProperty.create("east");
+    public static final BooleanProperty NORTH_IVY = BooleanProperty.create("north");
+    public static final BooleanProperty SOUTH_IVY = BooleanProperty.create("south");
+    public static final BooleanProperty WEST_IVY = BooleanProperty.create("west");
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final int MAX_AGE = 3;
     private static final VoxelShape POST_TEST = Block.box(7.0D, 0.0D, 7.0D, 7.0D, 12.0D, 7.0D);
@@ -62,7 +63,7 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
 
     public SpikyIvyBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(BOTTOM, Boolean.valueOf(true)).setValue(NORTH_IVY, WallSide.NONE).setValue(EAST_IVY, WallSide.NONE).setValue(SOUTH_IVY, WallSide.NONE).setValue(WEST_IVY, WallSide.NONE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(BOTTOM, Boolean.valueOf(true)).setValue(NORTH_IVY, false).setValue(EAST_IVY, false).setValue(SOUTH_IVY, false).setValue(WEST_IVY, false));
         this.shapeByIndex = this.makeShapes(3.0F, 3.0F, 12.0F, 0.0F, 12.0F, 12.0F);
 
     }
@@ -196,7 +197,10 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
     protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return pState.is(BlockTags.DIRT) || pState.is(Blocks.FARMLAND);
     }
-
+    @Override
+    public PushReaction getPistonPushReaction(BlockState pState) {
+        return PushReaction.DESTROY;
+    }
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         LevelReader levelreader = pContext.getLevel();
@@ -225,9 +229,9 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
         return pFacing == Direction.DOWN ? this.topUpdate(pLevel, pState, pFacingPos, pFacingState) : this.sideUpdate(pLevel, pCurrentPos, pState, pFacingPos, pFacingState, pFacing);
 
     }
-    private static boolean isConnected(BlockState pState, Property<WallSide> pHeightProperty) {
+    private static boolean isConnected(BlockState pState, Property<Boolean> pHeightProperty) {
         if(pState.getBlock()==ModBlocks.SPIKY_IVY.get())
-            return pState.getValue(pHeightProperty) != WallSide.NONE;
+            return pState.getValue(pHeightProperty) != false;
         else return false;
     }
 
@@ -257,18 +261,18 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
 
         for (Integer agege : AGE.getPossibleValues()) {
         for (Boolean obool : BOTTOM.getPossibleValues()) {
-            for (WallSide wallside : EAST_IVY.getPossibleValues()) {
-                for (WallSide wallside1 : NORTH_IVY.getPossibleValues()) {
-                    for (WallSide wallside2 : WEST_IVY.getPossibleValues()) {
-                        for (WallSide wallside3 : SOUTH_IVY.getPossibleValues()) {
+            for (Boolean Boolean : EAST_IVY.getPossibleValues()) {
+                for (Boolean Boolean1 : NORTH_IVY.getPossibleValues()) {
+                    for (Boolean Boolean2 : WEST_IVY.getPossibleValues()) {
+                        for (Boolean Boolean3 : SOUTH_IVY.getPossibleValues()) {
                             VoxelShape voxelshape9 = Shapes.empty();
-                            voxelshape9 = applyWallShape(voxelshape9, wallside, voxelshape4, voxelshape8);
-                            voxelshape9 = applyWallShape(voxelshape9, wallside2, voxelshape3, voxelshape7);
-                            voxelshape9 = applyWallShape(voxelshape9, wallside1, voxelshape1, voxelshape5);
-                            voxelshape9 = applyWallShape(voxelshape9, wallside3, voxelshape2, voxelshape6);
+                            voxelshape9 = applyWallShape(voxelshape9, Boolean, voxelshape4, voxelshape8);
+                            voxelshape9 = applyWallShape(voxelshape9, Boolean2, voxelshape3, voxelshape7);
+                            voxelshape9 = applyWallShape(voxelshape9, Boolean1, voxelshape1, voxelshape5);
+                            voxelshape9 = applyWallShape(voxelshape9, Boolean3, voxelshape2, voxelshape6);
                             if (obool) {
                                 voxelshape9 = Shapes.or(voxelshape9, voxelshape);
-                            } else if (wallside == WallSide.NONE && wallside1 == WallSide.NONE && wallside2 == WallSide.NONE && wallside3 == WallSide.NONE) {
+                            } else if (Boolean == false && Boolean1 == false && Boolean2 == false && Boolean3 == false) {
                                 voxelshape9 = Shapes.or(voxelshape9, voxelshape0);
                                 voxelshape9 = Shapes.or(voxelshape9, voxelshape1);
                                 voxelshape9 = Shapes.or(voxelshape9, voxelshape2);
@@ -277,7 +281,7 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
 
                             }
 
-                            BlockState blockstate = this.defaultBlockState().setValue(AGE, agege).setValue(BOTTOM, obool).setValue(EAST_IVY, wallside).setValue(WEST_IVY, wallside2).setValue(NORTH_IVY, wallside1).setValue(SOUTH_IVY, wallside3);
+                            BlockState blockstate = this.defaultBlockState().setValue(AGE, agege).setValue(BOTTOM, obool).setValue(EAST_IVY, Boolean).setValue(WEST_IVY, Boolean2).setValue(NORTH_IVY, Boolean1).setValue(SOUTH_IVY, Boolean3);
                             builder.put(blockstate, voxelshape9);
                         }
                     }
@@ -301,8 +305,8 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
         return this.shapeByIndex.get(pState);
     }
 
-    private static VoxelShape applyWallShape(VoxelShape pBaseShape, WallSide pHeight, VoxelShape pLowShape, VoxelShape pTallShape) {
-        return pHeight == WallSide.LOW ? Shapes.or(pBaseShape, pLowShape) : pBaseShape;
+    private static VoxelShape applyWallShape(VoxelShape pBaseShape, Boolean pHeight, VoxelShape pLowShape, VoxelShape pTallShape) {
+        return pHeight == true ? Shapes.or(pBaseShape, pLowShape) : pBaseShape;
     }
 
     private BlockState sideUpdate(LevelReader pLevel, BlockPos p_57990_, BlockState p_57991_, BlockPos p_57992_, BlockState p_57993_, Direction p_57994_) {
@@ -331,11 +335,11 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
         return p_58025_.setValue(NORTH_IVY, this.makeWallState(p_58026_, p_58030_, NORTH_TEST)).setValue(EAST_IVY, this.makeWallState(p_58027_, p_58030_, EAST_TEST)).setValue(SOUTH_IVY, this.makeWallState(p_58028_, p_58030_, SOUTH_TEST)).setValue(WEST_IVY, this.makeWallState(p_58029_, p_58030_, WEST_TEST));
     }
 
-    private WallSide makeWallState(boolean p_58042_, VoxelShape p_58043_, VoxelShape p_58044_) {
+    private Boolean makeWallState(boolean p_58042_, VoxelShape p_58043_, VoxelShape p_58044_) {
         if (p_58042_) {
-            return WallSide.LOW;
+            return true;
         } else {
-            return WallSide.NONE;
+            return false;
         }
     }
 

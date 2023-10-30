@@ -2,19 +2,20 @@ package net.dainplay.rpgworldmod.features;
 
 import com.mojang.serialization.Codec;
 import net.dainplay.rpgworldmod.block.ModBlocks;
+import net.dainplay.rpgworldmod.block.custom.SpikyIvyBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 
 import java.util.Random;
+
+import static net.dainplay.rpgworldmod.block.custom.SpikyIvyBlock.*;
 
 public class SpikyIvyFeature extends Feature<BlockStateConfiguration> {
     public SpikyIvyFeature(Codec<BlockStateConfiguration> p_65248_) {
@@ -64,10 +65,10 @@ public class SpikyIvyFeature extends Feature<BlockStateConfiguration> {
                         || worldgenlevel.getBlockState(blockpos.north()).is(Blocks.FARMLAND));
 
                 worldgenlevel.setBlock(blockpos, ModBlocks.SPIKY_IVY.get().defaultBlockState().setValue(BlockStateProperties.AGE_3, 3)
-                                .setValue(BlockStateProperties.EAST_WALL, place_east ? WallSide.LOW : WallSide.NONE)
-                                .setValue(BlockStateProperties.WEST_WALL, place_west ? WallSide.LOW : WallSide.NONE)
-                                .setValue(BlockStateProperties.SOUTH_WALL, place_south ? WallSide.LOW : WallSide.NONE)
-                                .setValue(BlockStateProperties.NORTH_WALL, place_north ? WallSide.LOW : WallSide.NONE),
+                                .setValue(EAST_IVY, place_east ? true : false)
+                                .setValue(WEST_IVY, place_west ? true : false)
+                                .setValue(SOUTH_IVY, place_south ? true : false)
+                                .setValue(NORTH_IVY, place_north ? true : false),
                         4);
 
 //east
@@ -86,10 +87,10 @@ public class SpikyIvyFeature extends Feature<BlockStateConfiguration> {
 
                 if (placechance_east == 1 && worldgenlevel.getBlockState(blockpos.east()).getBlock() == Blocks.AIR)
                     worldgenlevel.setBlock(blockpos.east(), ModBlocks.SPIKY_IVY.get().defaultBlockState().setValue(BlockStateProperties.AGE_3, 3)
-                                    .setValue(BlockStateProperties.EAST_WALL, place_east ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.WEST_WALL, WallSide.LOW)
-                                    .setValue(BlockStateProperties.SOUTH_WALL, place_south ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.NORTH_WALL, place_north ? WallSide.LOW : WallSide.NONE)
+                                    .setValue(EAST_IVY, place_east ? true : false)
+                                    .setValue(WEST_IVY, true)
+                                    .setValue(SOUTH_IVY, place_south ? true : false)
+                                    .setValue(NORTH_IVY, place_north ? true : false)
                                     .setValue(BlockStateProperties.BOTTOM, place_bottom),
                             4);
 //west
@@ -108,10 +109,10 @@ public class SpikyIvyFeature extends Feature<BlockStateConfiguration> {
 
                 if (placechance_west == 1 && worldgenlevel.getBlockState(blockpos.west()).getBlock() == Blocks.AIR)
                     worldgenlevel.setBlock(blockpos.west(), ModBlocks.SPIKY_IVY.get().defaultBlockState().setValue(BlockStateProperties.AGE_3, 3)
-                                    .setValue(BlockStateProperties.WEST_WALL, place_west ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.EAST_WALL, WallSide.LOW)
-                                    .setValue(BlockStateProperties.SOUTH_WALL, place_south ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.NORTH_WALL, place_north ? WallSide.LOW : WallSide.NONE)
+                                    .setValue(WEST_IVY, place_west ? true : false)
+                                    .setValue(EAST_IVY, true)
+                                    .setValue(SOUTH_IVY, place_south ? true : false)
+                                    .setValue(NORTH_IVY, place_north ? true : false)
                                     .setValue(BlockStateProperties.BOTTOM, place_bottom),
                             4);
 //south
@@ -130,10 +131,10 @@ public class SpikyIvyFeature extends Feature<BlockStateConfiguration> {
 
                 if (placechance_south == 1 && worldgenlevel.getBlockState(blockpos.south()).getBlock() == Blocks.AIR)
                     worldgenlevel.setBlock(blockpos.south(), ModBlocks.SPIKY_IVY.get().defaultBlockState().setValue(BlockStateProperties.AGE_3, 3)
-                                    .setValue(BlockStateProperties.SOUTH_WALL, place_south ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.NORTH_WALL, WallSide.LOW)
-                                    .setValue(BlockStateProperties.WEST_WALL, place_west ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.EAST_WALL, place_east ? WallSide.LOW : WallSide.NONE)
+                                    .setValue(SOUTH_IVY, place_south ? true : false)
+                                    .setValue(NORTH_IVY, true)
+                                    .setValue(WEST_IVY, place_west ? true : false)
+                                    .setValue(EAST_IVY, place_east ? true : false)
                                     .setValue(BlockStateProperties.BOTTOM, place_bottom),
                             4);
 //north
@@ -152,10 +153,10 @@ public class SpikyIvyFeature extends Feature<BlockStateConfiguration> {
 
                 if (placechance_north == 1 && worldgenlevel.getBlockState(blockpos.north()).getBlock() == Blocks.AIR)
                     worldgenlevel.setBlock(blockpos.north(), ModBlocks.SPIKY_IVY.get().defaultBlockState().setValue(BlockStateProperties.AGE_3, 3)
-                                    .setValue(BlockStateProperties.NORTH_WALL, place_north ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.SOUTH_WALL, WallSide.LOW)
-                                    .setValue(BlockStateProperties.WEST_WALL, place_west ? WallSide.LOW : WallSide.NONE)
-                                    .setValue(BlockStateProperties.EAST_WALL, place_east ? WallSide.LOW : WallSide.NONE)
+                                    .setValue(NORTH_IVY, place_north ? true : false)
+                                    .setValue(SOUTH_IVY, true)
+                                    .setValue(WEST_IVY, place_west ? true : false)
+                                    .setValue(EAST_IVY, place_east ? true : false)
                                     .setValue(BlockStateProperties.BOTTOM, place_bottom),
                             4);
             }

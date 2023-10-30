@@ -36,6 +36,9 @@ public class ModPlacedFeatures {
     public static final Holder<PlacedFeature> SHIVERALIS_PLACED = PlacementUtils.register("shiveralis_placed",
             ModConfiguredFeatures.SHIVERALIS, RarityFilter.onAverageOnceEvery(6),
             InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+    public static final Holder<PlacedFeature> FAIRAPIER_PLACED = PlacementUtils.register("fairapier_placed",
+            ModConfiguredFeatures.FAIRAPIER, RarityFilter.onAverageOnceEvery(6),
+            InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
     public static final Holder<PlacedFeature> RIE_FLOWER_PLACED = PlacementUtils.register("rie_flower_placed",
             ModConfiguredFeatures.RIE_FLOWER, RarityFilter.onAverageOnceEvery(2147483647),
             InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());

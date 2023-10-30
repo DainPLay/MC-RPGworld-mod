@@ -2,7 +2,13 @@ package net.dainplay.rpgworldmod.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.dainplay.rpgworldmod.RPGworldMod;
+import net.dainplay.rpgworldmod.sounds.ModSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.sounds.MusicManager;
+import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.Musics;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -12,6 +18,7 @@ import net.minecraft.world.level.material.FogType;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -22,13 +29,15 @@ import static net.minecraftforge.client.ClientCommandHandler.sendMessage;
 public class FogEventHandler {
 
     @SubscribeEvent
-    public static void onRenderFogColors(EntityViewRenderEvent.FogColors event) {
+    public static void onRenderFogColors(EntityViewRenderEvent.@NotNull FogColors event) {
 
         Player player = (Player) event.getCamera().getEntity();
         Level world = player.level;
         BlockPos playerPosition = player.blockPosition();
         Biome currentBiome = world.getBiome(playerPosition).value();
         FogType fogtype = event.getCamera().getFluidInCamera();
+
+
 
         if (!player.hasEffect(MobEffects.BLINDNESS) && fogtype == FogType.NONE && (world.isRaining() || world.isThundering()) && event.getCamera().getEntity() instanceof Player && currentBiome.getRegistryName() != null && currentBiome.getRegistryName().toString().equals("rpgworldmod:rie_weald")) {
 

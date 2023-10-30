@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.RegistryEvent;
@@ -70,8 +71,23 @@ public class ModBlocks {
             () -> new FlowerPotBlock(ModBlocks.SHIVERALIS.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
     public static final RegistryObject<Block> RPGIROLLE = registerBlockWithoutBlockItem("rpgirolle",
             () -> new FlowerBlock(MobEffects.SATURATION, 0, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()));
+    public static final RegistryObject<Block> WILD_FAIRAPIER = registerBlock("wild_fairapier",
+            () -> new FlowerBlock(MobEffects.DAMAGE_BOOST, 0, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()) {
+
+                protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+                @Override
+                public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+                    return SHAPE;
+                }
+            }, ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> FAIRAPIER_PLANT = registerBlockWithoutBlockItem("fairapier_plant",
+            () -> new FairapierPlantBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion()));
+    public static final RegistryObject<Block> FAIRAPIER_WILTED_PLANT = registerBlockWithoutBlockItem("fairapier_wilted_plant",
+            () -> new FairapierWiltedPlantBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion()));
     public static final RegistryObject<Block> POTTED_RPGIROLLE = registerBlockWithoutBlockItem("potted_rpgirolle",
             () -> new FlowerPotBlock(ModBlocks.RPGIROLLE.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
+    public static final RegistryObject<Block> POTTED_WILD_FAIRAPIER = registerBlockWithoutBlockItem("potted_wild_fairapier",
+            () -> new FlowerPotBlock(ModBlocks.WILD_FAIRAPIER.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
     public static final RegistryObject<Block> PROJECTRUFFLE = registerBlock("projectruffle",
             () -> new FlowerBlock(MobEffects.HARM, 0, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()) {
 
@@ -106,7 +122,7 @@ public class ModBlocks {
             () -> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)),
             ModCreativeModeTab.RPGWORLD_TAB);
     public static final RegistryObject<Block> RIE_HOLLOW = registerBlock("rie_hollow",
-            () -> new TreeHollowBlock(BlockBehaviour.Properties.copy(Blocks.JUKEBOX)),
+            () -> new TreeHollowBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F)),
             ModCreativeModeTab.RPGWORLD_TAB);
 
 

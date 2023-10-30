@@ -1,0 +1,20 @@
+{
+  "music.overworld.rie_weald": {
+    "sounds": [
+	  {
+        "name": "rpgworldmod:music/game/rie_weald",
+        "stream": true,
+		"weight": 1
+      }
+    ]
+  },
+  "music.overworld.rie_weald_fog": {
+    "sounds": [
+      {
+        "name": "rpgworldmod:music/game/rie_weald_fog",
+        "stream": true,
+        "weight": 1
+      }
+    ]
+  }
+}

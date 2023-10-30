@@ -4,12 +4,14 @@ import com.google.common.collect.ImmutableList;
 import net.dainplay.rpgworldmod.block.ModBlocks;
 import net.dainplay.rpgworldmod.block.custom.HoltsReflectionBlock;
 import net.dainplay.rpgworldmod.features.SpikyIvyFeature;
+import net.dainplay.rpgworldmod.sounds.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.sounds.Music;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
@@ -60,12 +62,17 @@ public class ModConfiguredFeatures {
                     FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
                             new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.SHIVERALIS.get().defaultBlockState().setValue(SweetBerryBushBlock.AGE,
                                     Integer.valueOf(3)))), List.of(Blocks.GRASS_BLOCK)));
+    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FAIRAPIER =
+            FeatureUtils.register("flower_fairapier", Feature.RANDOM_PATCH,
+                    FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_FAIRAPIER.get().defaultBlockState())), List.of(Blocks.GRASS_BLOCK)));
 
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> RIE_FLOWER =
             FeatureUtils.register("rie_flower", Feature.FLOWER,
                     new RandomPatchConfiguration(96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(ModBlocks.RPGIROLLE.get().defaultBlockState(), 8)
                             .add(ModBlocks.PROJECTRUFFLE.get().defaultBlockState(), 8)
+                            .add(ModBlocks.WILD_FAIRAPIER.get().defaultBlockState(), 8)
                             .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.NORTH), 1)
                             .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.SOUTH), 1)
                             .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.EAST), 1)
@@ -95,5 +102,7 @@ public class ModConfiguredFeatures {
     public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> TREE_HOLLOW_NORTH = FeatureUtils.register("tree_hollow_north", RPGFeatures.TREE_HOLLOW_NORTH, new BlockStateConfiguration(ModBlocks.RIE_HOLLOW.get().defaultBlockState()));
     public static final Holder<ConfiguredFeature<BlockStateConfiguration, ?>> TREE_HOLLOW_SOUTH = FeatureUtils.register("tree_hollow_south", RPGFeatures.TREE_HOLLOW_SOUTH, new BlockStateConfiguration(ModBlocks.RIE_HOLLOW.get().defaultBlockState()));
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_MOSS_RIE = FeatureUtils.register("patch_moss_rie", Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.MOSS_CARPET.defaultBlockState(), 3).add(ModBlocks.WIDOWEED.get().defaultBlockState(), 1))), BlockPredicate.allOf(BlockPredicate.matchesBlock(Blocks.AIR, BlockPos.ZERO), BlockPredicate.allOf(BlockPredicate.matchesBlocks(List.of(Blocks.GRASS_BLOCK, Blocks.MOSSY_COBBLESTONE, ModBlocks.MASKONITE_BLOCK.get()), new BlockPos(0, -1, 0)))))));
+    public static final Music RIE_WEALD_MUSIC = new Music(ModSounds.MUSIC_BIOME_RIE_WEALD, 1200, 12000, true);
+    public static final Music RIE_WEALD_MUSIC_FOG = new Music(ModSounds.MUSIC_BIOME_RIE_WEALD_FOG, 1200, 12000, true);
 
 }

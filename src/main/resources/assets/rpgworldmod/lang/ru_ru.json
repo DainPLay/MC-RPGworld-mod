@@ -9,6 +9,11 @@
   "item.rpgworldmod.rie_fruit": "Рия",
   "item.rpgworldmod.rpgirolle_item": "РПГриб",
   "item.rpgworldmod.projectruffle_item": "Стрюфель",
+  "item.rpgworldmod.fairapier_seed": "Семя клинкофея",
+  "item.rpgworldmod.fairapier_sword": "Клинкофей",
+  "item.rpgworldmod.fairapier_sword.desc": "Удобрен и готов к бою",
+  "item.rpgworldmod.fairapier_sword_wilted": "Клинкофей",
+  "item.rpgworldmod.fairapier_sword_wilted.desc": "Завял",
   "item.rpgworldmod.rie_boat": "Рийская лодка",
 
   "block.rpgworldmod.maskonite_block": "Масконит",
@@ -46,6 +51,10 @@
 
   "block.rpgworldmod.shiveralis": "Трусянка",
   "block.rpgworldmod.potted_shiveralis": "Трусянка в горшке",
+  "block.rpgworldmod.wild_fairapier": "Дикий клинкофей",
+  "block.rpgworldmod.potted_wild_fairapier": "Дикий клинкофей в горшке",
+  "block.rpgworldmod.fairapier_plant": "Клинкофей",
+  "block.rpgworldmod.fairapier_wilted_plant": "Клинкофей",
   "block.rpgworldmod.rpgirolle": "РПГриб",
   "block.rpgworldmod.potted_rpgirolle": "РПГриб в горшке",
   "block.rpgworldmod.projectruffle": "Скопление стрюфеля",
@@ -55,8 +64,9 @@
   "block.rpgworldmod.holts_reflection": "Лесное зеркало",
   "block.rpgworldmod.spiky_ivy": "Колкий плющ",
 
-  "entity.rpgworldmod.projectruffle": "Стрюфель",
+  "entity.rpgworldmod.projectruffle_arrow": "Стрюфель",
   "entity.rpgworldmod.modboat": "Лодка",
+  "entity.rpgworldmod.fairapier_seed_projectile": "Брошенное семя клинкофея",
 
   "biome.rpgworldmod.rie_weald": "Рийская дубрава",
 
@@ -64,6 +74,8 @@
   "death.attack.widoweed.player": "%1$s был поглощён травой-моравой, пытаясь убежать от %2$s",
   "death.attack.spiky_ivy": "%1$s закололся до смерти",
   "death.attack.spiky_ivy.player": "%1$s наткнулся на колкий плющ, пытаясь убежать от %2$s",
+  "death.attack.fairapier_seed": "%1$s был засажен насмерть %2$s",
+  "death.attack.fairapier_seed.item": "%1$s был засажен насмерть %2$s с помощью %3$s",
 
   "itemGroup.rpgworldtab": "RPGworld"
 }

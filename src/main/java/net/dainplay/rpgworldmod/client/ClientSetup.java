@@ -2,6 +2,7 @@ package net.dainplay.rpgworldmod.client;
 
 import net.dainplay.rpgworldmod.RPGworldMod;
 import net.dainplay.rpgworldmod.client.render.ProjectruffleArrowRenderer;
+import net.dainplay.rpgworldmod.client.render.FairapierSeedRenderer;
 import net.dainplay.rpgworldmod.world.entity.ModBoat;
 import net.dainplay.rpgworldmod.world.entity.ModEntities;
 import net.minecraft.client.model.BoatModel;
@@ -21,9 +22,11 @@ import net.dainplay.rpgworldmod.client.render.ModBoatRenderer;
 
 @Mod.EventBusSubscriber(modid = RPGworldMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
+
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntities.PROJECTRUFFLE_ARROW.get(), ProjectruffleArrowRenderer::new);
+        EntityRenderers.register(ModEntities.FAIRAPIER_SEED_PROJECTILE.get(), FairapierSeedRenderer::new);
     }
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)

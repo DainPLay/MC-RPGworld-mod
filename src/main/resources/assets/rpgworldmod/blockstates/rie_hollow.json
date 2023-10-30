@@ -1,32 +1,32 @@
 {
   "variants": {
-    "facing=east,has_record=false": {
+    "facing=east,has_contents=false": {
       "model": "rpgworldmod:block/rie_hollow",
       "y": 90
     },
-    "facing=north,has_record=false": {
+    "facing=north,has_contents=false": {
       "model": "rpgworldmod:block/rie_hollow"
     },
-    "facing=south,has_record=false": {
+    "facing=south,has_contents=false": {
       "model": "rpgworldmod:block/rie_hollow",
       "y": 180
     },
-    "facing=west,has_record=false": {
+    "facing=west,has_contents=false": {
       "model": "rpgworldmod:block/rie_hollow",
       "y": 270
     },
-    "facing=east,has_record=true": {
+    "facing=east,has_contents=true": {
       "model": "rpgworldmod:block/rie_hollow_filled",
       "y": 90
     },
-    "facing=north,has_record=true": {
+    "facing=north,has_contents=true": {
       "model": "rpgworldmod:block/rie_hollow_filled"
     },
-    "facing=south,has_record=true": {
+    "facing=south,has_contents=true": {
       "model": "rpgworldmod:block/rie_hollow_filled",
       "y": 180
     },
-    "facing=west,has_record=true": {
+    "facing=west,has_contents=true": {
       "model": "rpgworldmod:block/rie_hollow_filled",
       "y": 270
     }

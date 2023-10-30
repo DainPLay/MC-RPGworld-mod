@@ -3,6 +3,7 @@ package net.dainplay.rpgworldmod.block.entity;
 import com.mojang.datafixers.types.Type;
 import net.dainplay.rpgworldmod.RPGworldMod;
 import net.dainplay.rpgworldmod.block.ModBlocks;
+import net.dainplay.rpgworldmod.block.entity.custom.FairapierWiltedPlantBlockEntity;
 import net.dainplay.rpgworldmod.block.entity.custom.HoltsReflectionBlockEntity;
 import net.dainplay.rpgworldmod.block.entity.custom.ModSignBlockEntity;
 import net.dainplay.rpgworldmod.block.entity.custom.TreeHollowBlockEntity;
@@ -34,6 +35,8 @@ public class ModBlockEntities {
 
     public static final RegistryObject<BlockEntityType<TreeHollowBlockEntity>> TREE_HOLLOW_BLOCK_ENTITY = BLOCK_ENTITIES.register("tree_hollow_block_entity", () ->
             BlockEntityType.Builder.of(TreeHollowBlockEntity::new, ModBlocks.RIE_HOLLOW.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FairapierWiltedPlantBlockEntity>> FAIRAPIER_WILTED_PLANT_BLOCK_ENTITY = BLOCK_ENTITIES.register("fairapier_wilted_plant_block_entity", () ->
+            BlockEntityType.Builder.of(FairapierWiltedPlantBlockEntity::new, ModBlocks.FAIRAPIER_WILTED_PLANT.get()).build(null));
     public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> SIGN_BLOCK_ENTITIES = BLOCK_ENTITIES.register("sign_block_entity", () ->
             BlockEntityType.Builder.of(ModSignBlockEntity::new, ModBlocks.RIE_WALL_SIGN.get(),ModBlocks.RIE_SIGN.get()).build(null));
 

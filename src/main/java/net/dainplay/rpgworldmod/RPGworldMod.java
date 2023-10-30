@@ -6,6 +6,9 @@ import net.dainplay.rpgworldmod.block.entity.ModBlockEntities;
 import net.dainplay.rpgworldmod.block.entity.ModWoodTypes;
 import net.dainplay.rpgworldmod.init.ModFeatures;
 import net.dainplay.rpgworldmod.item.ModItems;
+import net.dainplay.rpgworldmod.item.custom.FairapierSwordItem;
+import net.dainplay.rpgworldmod.sounds.ModSounds;
+import net.dainplay.rpgworldmod.world.entity.FairapierSeedEntity;
 import net.dainplay.rpgworldmod.world.entity.ModEntities;
 import net.dainplay.rpgworldmod.world.entity.ProjectruffleArrowEntity;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -15,19 +18,18 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -45,6 +47,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import terrablender.api.Regions;
 
+import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -70,6 +73,7 @@ public class RPGworldMod
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(this::processIMC);
+        eventBus.addGenericListener(SoundEvent.class, ModSounds::registerSounds);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -81,7 +85,11 @@ public class RPGworldMod
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_SHIVERALIS.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RIE_SAPLING.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.RPGIROLLE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FAIRAPIER_PLANT.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FAIRAPIER_WILTED_PLANT.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_RPGIROLLE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_FAIRAPIER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_WILD_FAIRAPIER.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.PROJECTRUFFLE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_PROJECTRUFFLE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.HOLTS_REFLECTION.get(), RenderType.cutout());
@@ -174,10 +182,12 @@ public class RPGworldMod
             // Given we only add two biomes, we should keep our weight relatively low.
 
             ComposterBlock.COMPOSTABLES.put(ModBlocks.RIE_LEAVES.get().asItem(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(ModItems.FAIRAPIER_SEED.get().asItem(), 0.3F);
             ComposterBlock.COMPOSTABLES.put(ModItems.RIE_FRUIT.get().asItem(), 0.5F);
             ComposterBlock.COMPOSTABLES.put(ModItems.SHIVERALIS_BERRIES.get().asItem(), 0.3F);
             ComposterBlock.COMPOSTABLES.put(ModItems.RPGIROLLE_ITEM.get().asItem(), 0.65F);
             ComposterBlock.COMPOSTABLES.put(ModBlocks.HOLTS_REFLECTION.get().asItem(), 0.65F);
+            ComposterBlock.COMPOSTABLES.put(ModBlocks.WILD_FAIRAPIER.get().asItem(), 0.65F);
             ComposterBlock.COMPOSTABLES.put(ModBlocks.SPIKY_IVY.get().asItem(), 0.5F);
             ComposterBlock.COMPOSTABLES.put(ModBlocks.RIE_SAPLING.get().asItem(), 0.3F);
             Regions.register(new RPGworldRegionProvider(new ResourceLocation(MOD_ID, "overworld"),1));
@@ -186,13 +196,18 @@ public class RPGworldMod
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PROJECTRUFFLE.getId(), ModBlocks.POTTED_PROJECTRUFFLE);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.RIE_SAPLING.getId(), ModBlocks.POTTED_RIE_SAPLING);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.SPIKY_IVY.getId(), ModBlocks.POTTED_SPIKY_IVY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.WILD_FAIRAPIER.getId(), ModBlocks.POTTED_WILD_FAIRAPIER);
             DispenserBlock.registerBehavior(ModItems.PROJECTRUFFLE_ITEM.get(), new AbstractProjectileDispenseBehavior() {
-                /**
-                 * Return the projectile entity spawned by this dispense behavior.
-                 */
                 protected Projectile getProjectile(Level p_123407_, Position p_123408_, ItemStack p_123409_) {
                     ProjectruffleArrowEntity arrow = new ProjectruffleArrowEntity(ModEntities.PROJECTRUFFLE_ARROW.get(), p_123408_.x(), p_123408_.y(), p_123408_.z(), p_123407_);
                     arrow.pickup = AbstractArrow.Pickup.ALLOWED;
+                    return arrow;
+                }
+            });
+            DispenserBlock.registerBehavior(ModItems.FAIRAPIER_SEED.get(), new AbstractProjectileDispenseBehavior() {
+                protected Projectile getProjectile(Level p_123407_, Position p_123408_, ItemStack p_123409_) {
+                    FairapierSeedEntity arrow = new FairapierSeedEntity(ModEntities.FAIRAPIER_SEED_PROJECTILE.get(), p_123408_.x(), p_123408_.y(), p_123408_.z(), p_123407_);
+                    arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
                     return arrow;
                 }
             });
@@ -208,4 +223,9 @@ public class RPGworldMod
                 map(m->m.getMessageSupplier().get()).
                 collect(Collectors.toList()));
     }
+
+    public static ResourceLocation prefix(String name) {
+        return new ResourceLocation(MOD_ID, name.toLowerCase(Locale.ROOT));
+    }
+
 }

@@ -2,12 +2,10 @@ package net.dainplay.rpgworldmod.block.custom;
 
 import net.dainplay.rpgworldmod.block.entity.custom.TreeHollowBlockEntity;
 import net.minecraft.core.*;
-import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -15,7 +13,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -23,12 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.DispenserBlockEntity;
-import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
@@ -38,12 +31,12 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.Nullable;
 
 public class TreeHollowBlock extends BaseEntityBlock {
-    public static final BooleanProperty HAS_RECORD = BlockStateProperties.HAS_RECORD;
+    public static final BooleanProperty HAS_CONTENTS = BooleanProperty.create("has_contents");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    public TreeHollowBlock(BlockBehaviour.Properties p_54257_) {
+    public TreeHollowBlock(Properties p_54257_) {
         super(p_54257_);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HAS_RECORD, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HAS_CONTENTS, false));
     }
 
     /**
@@ -54,7 +47,7 @@ public class TreeHollowBlock extends BaseEntityBlock {
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
         CompoundTag compoundtag = BlockItem.getBlockEntityData(pStack);
         if (compoundtag != null) {
-            pLevel.setBlock(pPos, pState.setValue(HAS_RECORD, true), 2);
+            pLevel.setBlock(pPos, pState.setValue(HAS_CONTENTS, true), 2);
         }
 
     }
@@ -74,17 +67,16 @@ public class TreeHollowBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (pHit.getDirection() == pState.getValue(FACING))
-        if (pState.getValue(HAS_RECORD)) {
+        if (pState.getValue(HAS_CONTENTS)) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             TreeHollowBlockEntity TreeHollowBlockEntity = (TreeHollowBlockEntity)blockentity;
-            if(TreeHollowBlockEntity.getRecord().getItem() instanceof SpawnEggItem) {
+            if(TreeHollowBlockEntity.getItem().getItem() instanceof SpawnEggItem) {
                 dispenseMob(pLevel, pPos, pState,  pPlayer,  pHit);
             }
             else {
-                dispenseRecording(pLevel, pPos, pState);
+                dispenseItem(pLevel, pPos, pState);
             }
-            pLevel.playSound((Player) null, pPos, SoundEvents.BEEHIVE_EXIT, SoundSource.BLOCKS, 1.0F, 1.0F);
-            pState = pState.setValue(HAS_RECORD, false);
+            pState = pState.setValue(HAS_CONTENTS, false);
             pLevel.setBlock(pPos, pState, 2);
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         } else {
@@ -92,9 +84,8 @@ public class TreeHollowBlock extends BaseEntityBlock {
             if (!pPlayer.getItemInHand(pHand).isEmpty()) {
                 pLevel.playSound((Player)null, pPos, SoundEvents.BEEHIVE_ENTER, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (!pLevel.isClientSide) {
-                    this.setRecord(pLevel, pPos, pState, itemstack);
-                    pLevel.levelEvent((Player) null, 1010, pPos, Item.getId(itemstack.getItem()));
-                    itemstack.setCount(0);
+                    this.setItem(pLevel, pPos, pState, itemstack);
+                    if (!(pPlayer.getAbilities().instabuild)) itemstack.setCount(0);
                 }
 
                 BlockEntity blockentity = pLevel.getBlockEntity(pPos);
@@ -106,10 +97,10 @@ public class TreeHollowBlock extends BaseEntityBlock {
         }
         else return InteractionResult.PASS;
     }
-    public void setRecord(LevelAccessor pLevel, BlockPos pPos, BlockState pState, ItemStack pRecordStack) {
+    public void setItem(LevelAccessor pLevel, BlockPos pPos, BlockState pState, ItemStack pItemStack) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            ((TreeHollowBlockEntity)blockentity).setRecord(pRecordStack.copy());
-            pLevel.setBlock(pPos, pState.setValue(HAS_RECORD, true), 2);
+            ((TreeHollowBlockEntity)blockentity).setItem(pItemStack.copy());
+            pLevel.setBlock(pPos, pState.setValue(HAS_CONTENTS, true), 2);
     }
 
     private void dispenseMob(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer, BlockHitResult pHit) {
@@ -117,26 +108,27 @@ public class TreeHollowBlock extends BaseEntityBlock {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
         if (blockentity instanceof TreeHollowBlockEntity) {
             TreeHollowBlockEntity TreeHollowBlockEntity = (TreeHollowBlockEntity)blockentity;
-            ItemStack itemstack = TreeHollowBlockEntity.getRecord();
+            ItemStack itemstack = TreeHollowBlockEntity.getItem();
             if (!itemstack.isEmpty()) {
                 TreeHollowBlockEntity.clearContent();
                 Item item = itemstack.getItem();
                 EntityType<?> entityType = (((SpawnEggItem)item).getType(itemstack.getTag()));
                 BlockPos blockpos = pHit.getBlockPos();
+                pLevel.playSound((Player) null, pPos, SoundEvents.BEEHIVE_EXIT, SoundSource.BLOCKS, 1.0F, 1.0F);
                 entityType.spawn((ServerLevel)pLevel, itemstack, pPlayer, blockpos.relative(pState.getValue(FACING)), MobSpawnType.DISPENSER, false, false);
             }
         }
     }
 }
 
-    private void dispenseRecording(Level pLevel, BlockPos pPos, BlockState pState) {
+    private void dispenseItem(Level pLevel, BlockPos pPos, BlockState pState) {
         if (!pLevel.isClientSide) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof TreeHollowBlockEntity) {
                 TreeHollowBlockEntity TreeHollowBlockEntity = (TreeHollowBlockEntity)blockentity;
-                ItemStack itemstack = TreeHollowBlockEntity.getRecord();
+                ItemStack itemstack = TreeHollowBlockEntity.getItem();
                 if (!itemstack.isEmpty()) {
-                    pLevel.levelEvent(1010, pPos, 0);
+                    pLevel.playSound((Player) null, pPos, SoundEvents.BEEHIVE_EXIT, SoundSource.BLOCKS, 1.0F, 1.0F);
                     TreeHollowBlockEntity.clearContent();
                     double d0 = (double) EntityType.ITEM.getWidth();
                     double d1 = 0.45D - d0;
@@ -158,8 +150,9 @@ public class TreeHollowBlock extends BaseEntityBlock {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof TreeHollowBlockEntity) {
                 TreeHollowBlockEntity TreeHollowBlockEntity = (TreeHollowBlockEntity)blockentity;
-                ItemStack itemstack = TreeHollowBlockEntity.getRecord();
+                ItemStack itemstack = TreeHollowBlockEntity.getItem();
                 if (!itemstack.isEmpty()) {
+                    pLevel.playSound((Player) null, pPos, SoundEvents.BEEHIVE_EXIT, SoundSource.BLOCKS, 1.0F, 1.0F);
                     TreeHollowBlockEntity.clearContent();
                     Item item = itemstack.getItem();
                     EntityType<?> entityType = (((SpawnEggItem)item).getType(itemstack.getTag()));
@@ -171,14 +164,14 @@ public class TreeHollowBlock extends BaseEntityBlock {
 
 
 
-    private void dropRecording(Level pLevel, BlockPos pPos) {
+    private void dropItem(Level pLevel, BlockPos pPos) {
         if (!pLevel.isClientSide) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof TreeHollowBlockEntity) {
                 TreeHollowBlockEntity TreeHollowBlockEntity = (TreeHollowBlockEntity)blockentity;
-                ItemStack itemstack = TreeHollowBlockEntity.getRecord();
+                ItemStack itemstack = TreeHollowBlockEntity.getItem();
                 if (!itemstack.isEmpty()) {
-                    pLevel.levelEvent(1010, pPos, 0);
+                    pLevel.playSound((Player) null, pPos, SoundEvents.BEEHIVE_EXIT, SoundSource.BLOCKS, 1.0F, 1.0F);
                     TreeHollowBlockEntity.clearContent();
                     double d0 = (double) EntityType.ITEM.getWidth();
                     double d1 = 1.0D - d0;
@@ -200,11 +193,11 @@ public class TreeHollowBlock extends BaseEntityBlock {
         if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             TreeHollowBlockEntity TreeHollowBlockEntity = (TreeHollowBlockEntity)blockentity;
-            if(TreeHollowBlockEntity.getRecord().getItem() instanceof SpawnEggItem) {
+            if(TreeHollowBlockEntity.getItem().getItem() instanceof SpawnEggItem) {
                 dropMob(pLevel, pPos,  null);
             }
             else {
-                this.dropRecording(pLevel, pPos);
+                this.dropItem(pLevel, pPos);
             }
             super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         }
@@ -219,15 +212,12 @@ public class TreeHollowBlock extends BaseEntityBlock {
     public boolean hasAnalogOutputSignal(BlockState pState) {
         return true;
     }
-
-    public static final Logger LOGGER = LogManager.getLogger();
     @Override
     public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-        if (blockentity instanceof TreeHollowBlockEntity && pBlockState.getValue(HAS_RECORD)) {
-            double to_return = ((double)((TreeHollowBlockEntity)blockentity).getRecord().getCount()/(double)((TreeHollowBlockEntity)blockentity).getRecord().getItem().getMaxStackSize()*15);
-            LOGGER.info(((TreeHollowBlockEntity)blockentity).getRecord().getCount() + "/" + ((TreeHollowBlockEntity)blockentity).getRecord().getItem().getMaxStackSize() + "*15 = " + (((TreeHollowBlockEntity)blockentity).getRecord().getCount()/((TreeHollowBlockEntity)blockentity).getRecord().getItem().getMaxStackSize()*15) + " to_return: " + to_return);
-                return (int) Math.round(to_return);
+        if (blockentity instanceof TreeHollowBlockEntity && pBlockState.getValue(HAS_CONTENTS)) {
+            double to_return = ((double)((TreeHollowBlockEntity)blockentity).getItem().getCount()/(double)((TreeHollowBlockEntity)blockentity).getItem().getItem().getMaxStackSize()*15);
+                 return (int) Math.round(to_return);
         }
 
         return 0;
@@ -255,6 +245,6 @@ public class TreeHollowBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(HAS_RECORD, FACING);
+        pBuilder.add(HAS_CONTENTS, FACING);
     }
 }

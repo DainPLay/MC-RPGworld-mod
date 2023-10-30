@@ -5,13 +5,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TreeHollowBlockEntity extends BlockEntity implements Clearable {
-        private ItemStack record = ItemStack.EMPTY;
+        private ItemStack item = ItemStack.EMPTY;
 
         public TreeHollowBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
             super(ModBlockEntities.TREE_HOLLOW_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
@@ -19,30 +17,30 @@ public class TreeHollowBlockEntity extends BlockEntity implements Clearable {
 
         public void load(CompoundTag pTag) {
             super.load(pTag);
-            if (pTag.contains("RecordItem", 10)) {
-                this.setRecord(ItemStack.of(pTag.getCompound("RecordItem")));
+            if (pTag.contains("ContentItem", 10)) {
+                this.setItem(ItemStack.of(pTag.getCompound("ContentItem")));
             }
 
         }
 
         protected void saveAdditional(CompoundTag pTag) {
             super.saveAdditional(pTag);
-            if (!this.getRecord().isEmpty()) {
-                pTag.put("RecordItem", this.getRecord().save(new CompoundTag()));
+            if (!this.getItem().isEmpty()) {
+                pTag.put("ContentItem", this.getItem().save(new CompoundTag()));
             }
 
         }
 
-        public ItemStack getRecord() {
-            return this.record;
+        public ItemStack getItem() {
+            return this.item;
         }
 
-        public void setRecord(ItemStack pRecord) {
-            this.record = pRecord;
+        public void setItem(ItemStack item) {
+            this.item = item;
             this.setChanged();
         }
 
         public void clearContent() {
-            this.setRecord(ItemStack.EMPTY);
+            this.setItem(ItemStack.EMPTY);
         }
     }

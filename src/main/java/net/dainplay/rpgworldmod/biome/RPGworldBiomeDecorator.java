@@ -2,6 +2,7 @@ package net.dainplay.rpgworldmod.biome;
 
 import net.dainplay.rpgworldmod.features.FancyOakTreeFeature;
 import net.dainplay.rpgworldmod.util.ColorConstants;
+import net.dainplay.rpgworldmod.world.feature.ModConfiguredFeatures;
 import net.dainplay.rpgworldmod.world.feature.ModPlacedFeatures;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.util.Mth;
@@ -38,6 +39,7 @@ public class RPGworldBiomeDecorator {
                         .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS)
                         .foliageColorOverride(foliageColor)
                         .grassColorOverride(grassColor)
+                        .backgroundMusic(ModConfiguredFeatures.RIE_WEALD_MUSIC)
                         .build())
                 .mobSpawnSettings(spawnBuilder.build())
                 .generationSettings(biomeBuilder.build())
@@ -98,6 +100,7 @@ public class RPGworldBiomeDecorator {
         biomeFeatures.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.RIE_TREE_CHECKED);
         biomeFeatures.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, ModPlacedFeatures.MASKONITE_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SHIVERALIS_PLACED);
+        biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FAIRAPIER_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PROJECTRUFFLE_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.HOLTS_REFLECTION_PLACED);
         biomeFeatures.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.RPGIROLLE_PLACED);

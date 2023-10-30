@@ -179,7 +179,7 @@ public class TreeHollowFeatureWest extends Feature<BlockStateConfiguration> {
                         itemstack = ItemStack.EMPTY;
                         break;
                 }
-                if(itemchance <= 100) ((TreeHollowBlock)hollowblock).setRecord(worldgenlevel, blockpos.above(), worldgenlevel.getBlockState(blockpos.above()), itemstack);
+                if(itemchance <= 100) ((TreeHollowBlock)hollowblock).setItem(worldgenlevel, blockpos.above(), worldgenlevel.getBlockState(blockpos.above()), itemstack);
             }
             return true;
         }
