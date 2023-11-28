@@ -1,0 +1,35 @@
+{
+  "required": true,
+  "package": "net.dainplay.rpgworldmod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.rpgworldmod.refmap.json",
+  "mixins": [
+    "AbstractVillagerMixin",
+    "EntityMixin",
+    "FoxMixin",
+    "GiveGiftToHeroMixin",
+    "LivingEntityMixin",
+    "LookControlMixin",
+    "MobMixin",
+    "PiglinAiMixin",
+    "PotionItemMixin",
+    "PotionUtilsMixin",
+    "TippedArrowItemMixin",
+    "WitchMixin"
+  ],
+  "client": [
+    "AbstractContainerScreenMixin",
+    "ForgeIngameGuiMixin",
+    "GuiMixin",
+    "ItemInHandRendererMixin",
+    "LivingEntityRendererMixin",
+    "MouseHandlerMixin",
+    "PlayerRendererMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

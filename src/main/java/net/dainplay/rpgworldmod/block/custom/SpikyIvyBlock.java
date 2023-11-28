@@ -1,6 +1,8 @@
 package net.dainplay.rpgworldmod.block.custom;
 import com.google.common.collect.ImmutableMap;
 import net.dainplay.rpgworldmod.block.ModBlocks;
+import net.dainplay.rpgworldmod.entity.ModEntities;
+import net.dainplay.rpgworldmod.entity.custom.Bramblefox;
 import net.dainplay.rpgworldmod.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,22 +51,17 @@ import java.util.Random;
 public class SpikyIvyBlock extends Block implements BonemealableBlock {
     private final Map<BlockState, VoxelShape> shapeByIndex;
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
+    public static final BooleanProperty UP = BlockStateProperties.UP;
     public static final BooleanProperty EAST_IVY = BooleanProperty.create("east");
     public static final BooleanProperty NORTH_IVY = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH_IVY = BooleanProperty.create("south");
     public static final BooleanProperty WEST_IVY = BooleanProperty.create("west");
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    public static final int MAX_AGE = 3;
-    private static final VoxelShape POST_TEST = Block.box(7.0D, 0.0D, 7.0D, 7.0D, 12.0D, 7.0D);
-    private static final VoxelShape NORTH_TEST = Block.box(7.0D, 0.0D, 0.0D, 7.0D, 12.0D, 7.0D);
-    private static final VoxelShape SOUTH_TEST = Block.box(7.0D, 0.0D, 7.0D, 7.0D, 12.0D, 12.0D);
-    private static final VoxelShape WEST_TEST = Block.box(0.0D, 0.0D, 7.0D, 7.0D, 12.0D, 7.0D);
-    private static final VoxelShape EAST_TEST = Block.box(7.0D, 0.0D, 7.0D, 12.0D, 12.0D, 7.0D);
 
     public SpikyIvyBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(BOTTOM, Boolean.valueOf(true)).setValue(NORTH_IVY, false).setValue(EAST_IVY, false).setValue(SOUTH_IVY, false).setValue(WEST_IVY, false));
-        this.shapeByIndex = this.makeShapes(3.0F, 3.0F, 12.0F, 0.0F, 12.0F, 12.0F);
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(BOTTOM, Boolean.valueOf(true)).setValue(UP, Boolean.valueOf(false)).setValue(NORTH_IVY, false).setValue(EAST_IVY, false).setValue(SOUTH_IVY, false).setValue(WEST_IVY, false));
+        this.shapeByIndex = this.makeShapes(3.0F, 3.0F, 12.0F, 4.0F, 12.0F, 12.0F);
 
     }
     @Override
@@ -127,6 +124,7 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
                 .setValue(NORTH_IVY, pState.getValue(NORTH_IVY))
                 .setValue(SOUTH_IVY, pState.getValue(SOUTH_IVY))
                 .setValue(BOTTOM, pState.getValue(BOTTOM))
+                .setValue(UP, pState.getValue(UP))
         );
         net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pLevel.getBlockState(pPos));
         Direction growthDirection = Direction.EAST;
@@ -177,7 +175,8 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
                     .setValue(WEST_IVY, pState.getValue(WEST_IVY))
                     .setValue(NORTH_IVY, pState.getValue(NORTH_IVY))
                     .setValue(SOUTH_IVY, pState.getValue(SOUTH_IVY))
-                    .setValue(BOTTOM, pState.getValue(BOTTOM)));
+                    .setValue(BOTTOM, pState.getValue(BOTTOM))
+                    .setValue(UP, pState.getValue(UP)));
             net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pLevel.getBlockState(pPos));
             if (pPlayer != null) {
                 pPlayer.getItemInHand(pHand).hurtAndBreak(1, pPlayer, (p_186374_) -> {
@@ -189,14 +188,12 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
             return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
         }
     }
-    private boolean connectsTo(BlockState pState, boolean pSideSolid, Direction pDirection) {
+    private boolean connectsTo(BlockState pState) {
         return (pState.getBlock() == ModBlocks.SPIKY_IVY.get()
                 || pState.is(BlockTags.DIRT)
                 || pState.is(Blocks.FARMLAND));
     }
-    protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return pState.is(BlockTags.DIRT) || pState.is(Blocks.FARMLAND);
-    }
+
     @Override
     public PushReaction getPistonPushReaction(BlockState pState) {
         return PushReaction.DESTROY;
@@ -210,23 +207,24 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
         BlockPos blockpos3 = blockpos.south();
         BlockPos blockpos4 = blockpos.west();
         BlockPos blockpos5 = blockpos.below();
+        BlockPos blockpos6 = blockpos.above();
         BlockState blockstate = levelreader.getBlockState(blockpos1);
         BlockState blockstate1 = levelreader.getBlockState(blockpos2);
         BlockState blockstate2 = levelreader.getBlockState(blockpos3);
         BlockState blockstate3 = levelreader.getBlockState(blockpos4);
         BlockState blockstate4 = levelreader.getBlockState(blockpos5);
-        boolean flag = this.connectsTo(blockstate, blockstate.isFaceSturdy(levelreader, blockpos1, Direction.SOUTH), Direction.SOUTH);
-        boolean flag1 = this.connectsTo(blockstate1, blockstate1.isFaceSturdy(levelreader, blockpos2, Direction.WEST), Direction.WEST);
-        boolean flag2 = this.connectsTo(blockstate2, blockstate2.isFaceSturdy(levelreader, blockpos3, Direction.NORTH), Direction.NORTH);
-        boolean flag3 = this.connectsTo(blockstate3, blockstate3.isFaceSturdy(levelreader, blockpos4, Direction.EAST), Direction.EAST);
+        boolean flag = this.connectsTo(blockstate);
+        boolean flag1 = this.connectsTo(blockstate1);
+        boolean flag2 = this.connectsTo(blockstate2);
+        boolean flag3 = this.connectsTo(blockstate3);
         BlockState blockstate5 = this.defaultBlockState();
-        return this.updateShape(levelreader, blockstate5, blockpos5, blockstate4, flag, flag1, flag2, flag3);
+        return this.updateShape(levelreader, blockstate5, blockpos5, blockpos6, blockstate4, flag, flag1, flag2, flag3);
     }
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
 
-        return pFacing == Direction.DOWN ? this.topUpdate(pLevel, pState, pFacingPos, pFacingState) : this.sideUpdate(pLevel, pCurrentPos, pState, pFacingPos, pFacingState, pFacing);
+        return pFacing == Direction.DOWN ? this.topUpdate(pLevel, pState, pFacingPos, pCurrentPos.above(), pFacingState) : this.sideUpdate(pLevel, pCurrentPos, pState, pFacingPos, pFacingState, pFacing);
 
     }
     private static boolean isConnected(BlockState pState, Property<Boolean> pHeightProperty) {
@@ -235,54 +233,63 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
         else return false;
     }
 
-    private BlockState topUpdate(LevelReader pLevel, BlockState p_57976_, BlockPos p_57977_, BlockState p_57978_) {
+    private BlockState topUpdate(LevelReader pLevel, BlockState p_57976_, BlockPos p_57977_, BlockPos above, BlockState p_57978_) {
         boolean flag = isConnected(p_57976_, NORTH_IVY);
         boolean flag1 = isConnected(p_57976_, EAST_IVY);
         boolean flag2 = isConnected(p_57976_, SOUTH_IVY);
         boolean flag3 = isConnected(p_57976_, WEST_IVY);
-        return this.updateShape(pLevel, p_57976_, p_57977_, p_57978_, flag, flag1, flag2, flag3);
+        return this.updateShape(pLevel, p_57976_, p_57977_, above, p_57978_, flag, flag1, flag2, flag3);
     }
-    private Map<BlockState, VoxelShape> makeShapes(float p_57966_, float p_57967_, float p_57968_, float p_57969_, float p_57970_, float p_57971_) {
-        float f = 8.0F - p_57966_;
-        float f1 = 8.0F + p_57966_;
-        float f2 = 8.0F - p_57967_;
-        float f3 = 8.0F + p_57967_;
-        VoxelShape voxelshape = Block.box((double) f, 0.0D, (double) f, (double) f1, (double) p_57968_, (double) f1);
-        VoxelShape voxelshape0 = Block.box((double) f, 0.0D, (double) f, (double) f1, 16F, (double) f1);
-        VoxelShape voxelshape1 = Block.box((double) f2, (double) p_57969_, 0.0D, (double) f3, (double) p_57970_, (double) f3);
-        VoxelShape voxelshape2 = Block.box((double) f2, (double) p_57969_, (double) f2, (double) f3, (double) p_57970_, 16.0D);
-        VoxelShape voxelshape3 = Block.box(0.0D, (double) p_57969_, (double) f2, (double) f3, (double) p_57970_, (double) f3);
-        VoxelShape voxelshape4 = Block.box((double) f2, (double) p_57969_, (double) f2, 16.0D, (double) p_57970_, (double) f3);
-        VoxelShape voxelshape5 = Block.box((double) f2, (double) p_57969_, 0.0D, (double) f3, (double) p_57971_, (double) f3);
-        VoxelShape voxelshape6 = Block.box((double) f2, (double) p_57969_, (double) f2, (double) f3, (double) p_57971_, 16.0D);
-        VoxelShape voxelshape7 = Block.box(0.0D, (double) p_57969_, (double) f2, (double) f3, (double) p_57971_, (double) f3);
-        VoxelShape voxelshape8 = Block.box((double) f2, (double) p_57969_, (double) f2, 16.0D, (double) p_57971_, (double) f3);
+    private Map<BlockState, VoxelShape> makeShapes(float pX1, float pX2, float pY1, float pY2, float pZ1, float pZ2) {
+        float f = 8.0F - pX1;
+        float f1 = 8.0F + pX1;
+        float f2 = 8.0F - pX2;
+        float f3 = 8.0F + pX2;
+        VoxelShape voxelshape = Block.box(f, 4.0D, f, f1, 16.0D, f1);
+        VoxelShape voxelshape0 = Block.box(f, 0.0D, f, f1, pZ2, f1);
+        VoxelShape voxelshape1 = Block.box(f2, pY2, 0.0D, f3, pZ1, f3);
+        VoxelShape voxelshape2 = Block.box(f2, pY2, f2, f3, pZ1, 16.0D);
+        VoxelShape voxelshape3 = Block.box(0.0D, pY2, f2, f3, pZ1, f3);
+        VoxelShape voxelshape4 = Block.box(f2, pY2, f2, 16.0D, pZ1, f3);
+        VoxelShape voxelshape5 = Block.box(f2, pY2, 0.0D, f3, pZ2, f3);
+        VoxelShape voxelshape6 = Block.box(f2, pY2, f2, f3, pZ2, 16.0D);
+        VoxelShape voxelshape7 = Block.box(0.0D, pY2, f2, f3, pZ2, f3);
+        VoxelShape voxelshape8 = Block.box(f2, pY2, f2, 16.0D, pZ2, f3);
         ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
 
-        for (Integer agege : AGE.getPossibleValues()) {
-        for (Boolean obool : BOTTOM.getPossibleValues()) {
-            for (Boolean Boolean : EAST_IVY.getPossibleValues()) {
-                for (Boolean Boolean1 : NORTH_IVY.getPossibleValues()) {
-                    for (Boolean Boolean2 : WEST_IVY.getPossibleValues()) {
-                        for (Boolean Boolean3 : SOUTH_IVY.getPossibleValues()) {
-                            VoxelShape voxelshape9 = Shapes.empty();
-                            voxelshape9 = applyWallShape(voxelshape9, Boolean, voxelshape4, voxelshape8);
-                            voxelshape9 = applyWallShape(voxelshape9, Boolean2, voxelshape3, voxelshape7);
-                            voxelshape9 = applyWallShape(voxelshape9, Boolean1, voxelshape1, voxelshape5);
-                            voxelshape9 = applyWallShape(voxelshape9, Boolean3, voxelshape2, voxelshape6);
-                            if (obool) {
-                                voxelshape9 = Shapes.or(voxelshape9, voxelshape);
-                            } else if (Boolean == false && Boolean1 == false && Boolean2 == false && Boolean3 == false) {
-                                voxelshape9 = Shapes.or(voxelshape9, voxelshape0);
-                                voxelshape9 = Shapes.or(voxelshape9, voxelshape1);
-                                voxelshape9 = Shapes.or(voxelshape9, voxelshape2);
-                                voxelshape9 = Shapes.or(voxelshape9, voxelshape3);
-                                voxelshape9 = Shapes.or(voxelshape9, voxelshape4);
+        for (Integer age : AGE.getPossibleValues()) {
+            for (Boolean bottom_connection : BOTTOM.getPossibleValues()) {
+                for (Boolean up_connection : UP.getPossibleValues()) {
+                for (Boolean east_connection : EAST_IVY.getPossibleValues()) {
+                    for (Boolean north_connection : NORTH_IVY.getPossibleValues()) {
+                        for (Boolean west_connection : WEST_IVY.getPossibleValues()) {
+                            for (Boolean south_connection : SOUTH_IVY.getPossibleValues()) {
+                                VoxelShape voxelshape9 = Shapes.empty();
+                                voxelshape9 = applyWallShape(voxelshape9, east_connection, voxelshape4, voxelshape8);
+                                voxelshape9 = applyWallShape(voxelshape9, west_connection, voxelshape3, voxelshape7);
+                                voxelshape9 = applyWallShape(voxelshape9, north_connection, voxelshape1, voxelshape5);
+                                voxelshape9 = applyWallShape(voxelshape9, south_connection, voxelshape2, voxelshape6);
+                                if (bottom_connection) {
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape0);
+                                }
+                                if (up_connection) {
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape);
+                                }
+                                if (east_connection == false && north_connection == false
+                                        && west_connection == false && south_connection == false
+                                        && bottom_connection == false && up_connection == false) {
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape);
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape0);
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape1);
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape2);
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape3);
+                                    voxelshape9 = Shapes.or(voxelshape9, voxelshape4);
 
+                                }
+
+                                BlockState blockstate = this.defaultBlockState().setValue(AGE, age).setValue(BOTTOM, bottom_connection).setValue(UP, up_connection).setValue(EAST_IVY, east_connection).setValue(WEST_IVY, west_connection).setValue(NORTH_IVY, north_connection).setValue(SOUTH_IVY, south_connection);
+                                builder.put(blockstate, voxelshape9);
                             }
-
-                            BlockState blockstate = this.defaultBlockState().setValue(AGE, agege).setValue(BOTTOM, obool).setValue(EAST_IVY, Boolean).setValue(WEST_IVY, Boolean2).setValue(NORTH_IVY, Boolean1).setValue(SOUTH_IVY, Boolean3);
-                            builder.put(blockstate, voxelshape9);
                         }
                     }
                 }
@@ -310,32 +317,31 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
     }
 
     private BlockState sideUpdate(LevelReader pLevel, BlockPos p_57990_, BlockState p_57991_, BlockPos p_57992_, BlockState p_57993_, Direction p_57994_) {
-        Direction direction = p_57994_.getOpposite();
-        boolean flag = p_57994_ == Direction.NORTH ? this.connectsTo(p_57993_, p_57993_.isFaceSturdy(pLevel, p_57992_, direction), direction) : isConnected(p_57991_, NORTH_IVY);
-        boolean flag1 = p_57994_ == Direction.EAST ? this.connectsTo(p_57993_, p_57993_.isFaceSturdy(pLevel, p_57992_, direction), direction) : isConnected(p_57991_, EAST_IVY);
-        boolean flag2 = p_57994_ == Direction.SOUTH ? this.connectsTo(p_57993_, p_57993_.isFaceSturdy(pLevel, p_57992_, direction), direction) : isConnected(p_57991_, SOUTH_IVY);
-        boolean flag3 = p_57994_ == Direction.WEST ? this.connectsTo(p_57993_, p_57993_.isFaceSturdy(pLevel, p_57992_, direction), direction) : isConnected(p_57991_, WEST_IVY);
+        boolean flag = p_57994_ == Direction.NORTH ? this.connectsTo(p_57993_) : isConnected(p_57991_, NORTH_IVY);
+        boolean flag1 = p_57994_ == Direction.EAST ? this.connectsTo(p_57993_) : isConnected(p_57991_, EAST_IVY);
+        boolean flag2 = p_57994_ == Direction.SOUTH ? this.connectsTo(p_57993_) : isConnected(p_57991_, SOUTH_IVY);
+        boolean flag3 = p_57994_ == Direction.WEST ? this.connectsTo(p_57993_) : isConnected(p_57991_, WEST_IVY);
         BlockPos blockpos = p_57990_.below();
+        BlockPos blockpos_above = p_57990_.above();
         BlockState blockstate = pLevel.getBlockState(blockpos);
-        return this.updateShape(pLevel, p_57991_, blockpos, blockstate, flag, flag1, flag2, flag3);
+        return this.updateShape(pLevel, p_57991_, blockpos, blockpos_above, blockstate, flag, flag1, flag2, flag3);
     }
 
     @Override
     public float getDestroyProgress(BlockState state, Player player, BlockGetter getter, BlockPos pos) {
-        // ItemShears#getDestroySpeed is really dumb and doesn't check IShearable, so we have to do it this way to try to match the wool break speed with shears
         return (player.getMainHandItem().getItem() instanceof ShearsItem || player.getMainHandItem().getItem() instanceof SwordItem) ? 0.9F : super.getDestroyProgress(state, player, getter, pos);
     }
-    private BlockState updateShape(LevelReader pLevel, BlockState p_57981_, BlockPos p_57982_, BlockState p_57983_, boolean p_57984_, boolean p_57985_, boolean p_57986_, boolean p_57987_) {
+    private BlockState updateShape(LevelReader pLevel, BlockState p_57981_, BlockPos p_57982_, BlockPos above, BlockState p_57983_, boolean p_57984_, boolean p_57985_, boolean p_57986_, boolean p_57987_) {
         VoxelShape voxelshape = p_57983_.getCollisionShape(pLevel, p_57982_).getFaceShape(Direction.UP);
         BlockState blockstate = this.updateSides(p_57981_, p_57984_, p_57985_, p_57986_, p_57987_, voxelshape);
-        return blockstate.setValue(BOTTOM, Boolean.valueOf(this.mayPlaceOn(pLevel.getBlockState(p_57982_), pLevel, p_57982_)));
+        return blockstate.setValue(UP, Boolean.valueOf(this.connectsTo(pLevel.getBlockState(above)))).setValue(BOTTOM, Boolean.valueOf(this.connectsTo(pLevel.getBlockState(p_57982_))));
     }
 
     private BlockState updateSides(BlockState p_58025_, boolean p_58026_, boolean p_58027_, boolean p_58028_, boolean p_58029_, VoxelShape p_58030_) {
-        return p_58025_.setValue(NORTH_IVY, this.makeWallState(p_58026_, p_58030_, NORTH_TEST)).setValue(EAST_IVY, this.makeWallState(p_58027_, p_58030_, EAST_TEST)).setValue(SOUTH_IVY, this.makeWallState(p_58028_, p_58030_, SOUTH_TEST)).setValue(WEST_IVY, this.makeWallState(p_58029_, p_58030_, WEST_TEST));
+        return p_58025_.setValue(NORTH_IVY, this.makeWallState(p_58026_)).setValue(EAST_IVY, this.makeWallState(p_58027_)).setValue(SOUTH_IVY, this.makeWallState(p_58028_)).setValue(WEST_IVY, this.makeWallState(p_58029_));
     }
 
-    private Boolean makeWallState(boolean p_58042_, VoxelShape p_58043_, VoxelShape p_58044_) {
+    private Boolean makeWallState(boolean p_58042_) {
         if (p_58042_) {
             return true;
         } else {
@@ -350,43 +356,13 @@ public class SpikyIvyBlock extends Block implements BonemealableBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(AGE, BOTTOM, NORTH_IVY, EAST_IVY, WEST_IVY, SOUTH_IVY);
+        pBuilder.add(AGE, BOTTOM, UP, NORTH_IVY, EAST_IVY, WEST_IVY, SOUTH_IVY);
     }
-/*
-    @Override
-    @Deprecated
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
-        switch(pRotation) {
-            case CLOCKWISE_180:
-                return pState.setValue(NORTH_IVY, pState.getValue(SOUTH_IVY)).setValue(EAST_IVY, pState.getValue(WEST_IVY)).setValue(SOUTH_IVY, pState.getValue(NORTH_IVY)).setValue(WEST_IVY, pState.getValue(EAST_IVY));
-            case COUNTERCLOCKWISE_90:
-                return pState.setValue(NORTH_IVY, pState.getValue(EAST_IVY)).setValue(EAST_IVY, pState.getValue(SOUTH_IVY)).setValue(SOUTH_IVY, pState.getValue(WEST_IVY)).setValue(WEST_IVY, pState.getValue(NORTH_IVY));
-            case CLOCKWISE_90:
-                return pState.setValue(NORTH_IVY, pState.getValue(WEST_IVY)).setValue(EAST_IVY, pState.getValue(NORTH_IVY)).setValue(SOUTH_IVY, pState.getValue(EAST_IVY)).setValue(WEST_IVY, pState.getValue(SOUTH_IVY));
-            default:
-                return pState;
-        }
-    }
-
-    @Override
-    @Deprecated
-    public BlockState mirror(BlockState pState, Mirror pMirror) {
-        switch(pMirror) {
-            case LEFT_RIGHT:
-                return pState.setValue(NORTH_IVY, pState.getValue(SOUTH_IVY)).setValue(SOUTH_IVY, pState.getValue(NORTH_IVY));
-            case FRONT_BACK:
-                return pState.setValue(EAST_IVY, pState.getValue(WEST_IVY)).setValue(WEST_IVY, pState.getValue(EAST_IVY));
-            default:
-                return super.mirror(pState, pMirror);
-        }
-    }
-
- */
 
     @Override
     @Deprecated
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
-        if (!(pEntity instanceof ItemEntity) && !pEntity.isCrouching()) {
+        if (!(pEntity instanceof ItemEntity) && !pEntity.isCrouching() && pEntity.getType() != ModEntities.BRAMBLEFOX.get() && pEntity.getType() != ModEntities.MINTOBAT.get()) {
             pEntity.hurt((new DamageSource("spiky_ivy")), 2.5F);
             pEntity.makeStuckInBlock(pState, new Vec3(0.25D, 1.0F, 0.25D));
         }

@@ -3,20 +3,17 @@ package net.dainplay.rpgworldmod.world.feature;
 import com.google.common.collect.ImmutableList;
 import net.dainplay.rpgworldmod.block.ModBlocks;
 import net.dainplay.rpgworldmod.block.custom.HoltsReflectionBlock;
-import net.dainplay.rpgworldmod.features.SpikyIvyFeature;
 import net.dainplay.rpgworldmod.sounds.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.sounds.Music;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SeaPickleBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -28,18 +25,15 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BushFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
-import java.util.Random;
+
+import static net.dainplay.rpgworldmod.block.custom.ParalilyBlock.AGE;
 
 public class ModConfiguredFeatures {
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> RIE_TREE = FeatureUtils.register("rie_tree", Feature.TREE, createRieTree().decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, LeaveVineDecorator.INSTANCE)).ignoreVines().build());
@@ -57,22 +51,24 @@ public class ModConfiguredFeatures {
             FeatureUtils.register("rie_spawn", Feature.RANDOM_SELECTOR,
                     new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(RIE_CHECKED,
                             0.5F)), RIE_CHECKED));
-    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> SHIVERALIS =
-            FeatureUtils.register("flower_shiveralis", Feature.RANDOM_PATCH,
-                    FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
-                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.SHIVERALIS.get().defaultBlockState().setValue(SweetBerryBushBlock.AGE,
-                                    Integer.valueOf(3)))), List.of(Blocks.GRASS_BLOCK)));
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> FAIRAPIER =
-            FeatureUtils.register("flower_fairapier", Feature.RANDOM_PATCH,
-                    FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
-                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_FAIRAPIER.get().defaultBlockState())), List.of(Blocks.GRASS_BLOCK)));
-
+            FeatureUtils.register("flower_fairapier", Feature.NO_BONEMEAL_FLOWER,
+                    new RandomPatchConfiguration(48, 3, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_FAIRAPIER.get().defaultBlockState())))));
+    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> SHIVERALIS =
+            FeatureUtils.register("flower_shiveralis", Feature.NO_BONEMEAL_FLOWER,
+                    new RandomPatchConfiguration(48, 3, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.SHIVERALIS.get().defaultBlockState().setValue(SweetBerryBushBlock.AGE,
+                                    3))))));
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> RIE_FLOWER =
             FeatureUtils.register("rie_flower", Feature.FLOWER,
                     new RandomPatchConfiguration(96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(ModBlocks.RPGIROLLE.get().defaultBlockState(), 8)
                             .add(ModBlocks.PROJECTRUFFLE.get().defaultBlockState(), 8)
+                            .add(ModBlocks.MIMOSSA.get().defaultBlockState(), 6)
                             .add(ModBlocks.WILD_FAIRAPIER.get().defaultBlockState(), 8)
+                            .add(ModBlocks.CHEESE_CAP.get().defaultBlockState(), 6)
+                            .add(ModBlocks.MOSSHROOM.get().defaultBlockState(), 6)
                             .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.NORTH), 1)
                             .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.SOUTH), 1)
                             .add(ModBlocks.HOLTS_REFLECTION.get().defaultBlockState().setValue(HoltsReflectionBlock.FACING, Direction.EAST), 1)
@@ -81,10 +77,28 @@ public class ModConfiguredFeatures {
             FeatureUtils.register("flower_rpgirolle", Feature.NO_BONEMEAL_FLOWER,
                     new RandomPatchConfiguration(8, 2, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                             new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RPGIROLLE.get())))));
+    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> MIMOSSA =
+            FeatureUtils.register("flower_mimossa", Feature.NO_BONEMEAL_FLOWER,
+                    new RandomPatchConfiguration(14, 2, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.MIMOSSA.get())))));
+    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> CHEESE_CAP =
+            FeatureUtils.register("flower_cheese_cap", Feature.NO_BONEMEAL_FLOWER,
+                    new RandomPatchConfiguration(14, 2, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.CHEESE_CAP.get())))));
+    public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> MOSSHROOM =
+            FeatureUtils.register("flower_mosshroom", Feature.NO_BONEMEAL_FLOWER,
+                    new RandomPatchConfiguration(14, 2, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.MOSSHROOM.get())))));
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> PROJECTRUFFLE =
             FeatureUtils.register("flower_projectruffle", Feature.NO_BONEMEAL_FLOWER,
                     new RandomPatchConfiguration(14, 3, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                             new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.PROJECTRUFFLE.get())))));
+        public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_PARALILY =
+            FeatureUtils.register("patch_paralily", Feature.RANDOM_PATCH,
+                    new RandomPatchConfiguration(10, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                    .add(ModBlocks.PARALILY.get().defaultBlockState().setValue(AGE, 1), 1)
+                                    .add(Blocks.LILY_PAD.defaultBlockState(), 4))))));
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> HOLTS_REFLECTION =
             FeatureUtils.register("flower_holts_reflection", Feature.NO_BONEMEAL_FLOWER,
                     new RandomPatchConfiguration(10, 0, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,

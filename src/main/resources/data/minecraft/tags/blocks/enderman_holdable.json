@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "rpgworldmod:rpgirolle"
+    "rpgworldmod:holts_reflection",
+    "rpgworldmod:rpgirolle",
+    "rpgworldmod:mosshroom",
+    "rpgworldmod:cheese_cap"
   ]
 }

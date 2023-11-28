@@ -16,5 +16,38 @@
         "weight": 1
       }
     ]
+  },
+  "rpgworldmod.zap": {
+    "sounds": [
+        "rpgworldmod:zap1",
+      "rpgworldmod:zap2"
+    ]
+  },
+  "rpgworldmod.paralised": {
+    "sounds": [
+      "rpgworldmod:deny"
+    ]
+  },
+  "rpgworldmod.mintobat.attack": {
+    "sounds": [
+      "rpgworldmod:mintobat/howl1",
+      "rpgworldmod:mintobat/howl2"
+    ]
+  },
+  "rpgworldmod.mintobat.ambient": {
+    "sounds": [
+      "rpgworldmod:mintobat/ambient"
+    ]
+  },
+  "rpgworldmod.mintobat.death": {
+    "sounds": [
+      "rpgworldmod:mintobat/death1",
+      "rpgworldmod:mintobat/death2"
+    ]
+  },
+  "rpgworldmod.mintobat.hit": {
+    "sounds": [
+      "rpgworldmod:mintobat/hit"
+    ]
   }
 }

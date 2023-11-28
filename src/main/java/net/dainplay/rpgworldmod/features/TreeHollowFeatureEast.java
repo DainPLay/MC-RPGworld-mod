@@ -97,7 +97,7 @@ public class TreeHollowFeatureEast extends Feature<BlockStateConfiguration> {
                     case 33:
                     case 34:
                     case 35:
-                        itemstack = Items.BAT_SPAWN_EGG.getDefaultInstance();
+                        itemstack = ModItems.MINTOBAT_SPAWN_EGG.get().getDefaultInstance();
                         break;
                     case 36:
                     case 37:

@@ -3,7 +3,7 @@
 	"textures": {
 		"4": "rpgworldmod:block/spiky_ivy_2",
 		"5": "rpgworldmod:block/spiky_ivy_4",
-		"particle": "rpgworldmod:block/spiky_ivy_2_below"
+		"particle": "rpgworldmod:block/spiky_ivy_4"
 	},
 	"elements": [
 		{

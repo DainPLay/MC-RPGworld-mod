@@ -1,6 +1,6 @@
 package net.dainplay.rpgworldmod.item.custom;
 
-import net.dainplay.rpgworldmod.world.entity.FairapierSeedEntity;
+import net.dainplay.rpgworldmod.entity.projectile.FairapierSeedEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;

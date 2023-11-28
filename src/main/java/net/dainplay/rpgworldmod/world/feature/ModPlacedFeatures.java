@@ -5,6 +5,7 @@ import net.dainplay.rpgworldmod.RPGworldMod;
 import net.dainplay.rpgworldmod.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -51,6 +52,17 @@ public class ModPlacedFeatures {
     public static final Holder<PlacedFeature> RPGIROLLE_PLACED = PlacementUtils.register("rpgirolle_placed",
             ModConfiguredFeatures.RPGIROLLE, RarityFilter.onAverageOnceEvery(8),
             InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+    public static final Holder<PlacedFeature> MIMOSSA_PLACED = PlacementUtils.register("mimossa_placed",
+            ModConfiguredFeatures.MIMOSSA, RarityFilter.onAverageOnceEvery(5),
+            InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+    public static final Holder<PlacedFeature> CHEESE_CAP_PLACED = PlacementUtils.register("cheese_cap_placed",
+            ModConfiguredFeatures.CHEESE_CAP, RarityFilter.onAverageOnceEvery(5),
+            InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+    public static final Holder<PlacedFeature> MOSSHROOM_PLACED = PlacementUtils.register("mosshroom_placed",
+            ModConfiguredFeatures.MOSSHROOM, RarityFilter.onAverageOnceEvery(5),
+            InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+    public static final Holder<PlacedFeature> PATCH_PARALILY = PlacementUtils.register("patch_paralily", ModConfiguredFeatures.PATCH_PARALILY, worldSurfaceSquaredWithCount(4));
+
     public static final Holder<PlacedFeature> SPIKY_IVY_PLACED = PlacementUtils.register("spiky_ivy_placed", ModConfiguredFeatures.SPIKY_IVY, CountPlacement.of(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, SurfaceWaterDepthFilter.forMaxDepth(0), BiomeFilter.biome(), RarityFilter.onAverageOnceEvery(4));
     public static final Holder<PlacedFeature> TREE_HOLLOW_WEST_PLACED = PlacementUtils.register("tree_hollow_west_placed", ModConfiguredFeatures.TREE_HOLLOW_WEST, CountPlacement.of(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, SurfaceWaterDepthFilter.forMaxDepth(0), BiomeFilter.biome());
     public static final Holder<PlacedFeature> TREE_HOLLOW_EAST_PLACED = PlacementUtils.register("tree_hollow_east_placed", ModConfiguredFeatures.TREE_HOLLOW_EAST, CountPlacement.of(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, SurfaceWaterDepthFilter.forMaxDepth(0), BiomeFilter.biome());

@@ -82,6 +82,11 @@ public class FairapierSwordItem extends SwordItem {
         return !EnchantmentHelper.getEnchantments(book).containsKey(Enchantments.MENDING) && super.isBookEnchantable(stack, book);
     }
 
+    @Override
+    public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
+        return net.minecraftforge.common.ToolActions.SWORD_DIG == toolAction;
+    }
+
     public MutableComponent getDisplayName() {
         return new TranslatableComponent(this.getDescriptionId() + ".desc");
     }

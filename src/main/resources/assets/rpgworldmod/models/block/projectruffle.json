@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "rpgworldmod:block/cross",
   "textures": {
     "cross": "rpgworldmod:block/projectruffle"
   }

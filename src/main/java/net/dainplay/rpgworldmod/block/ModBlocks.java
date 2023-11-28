@@ -3,6 +3,7 @@ package net.dainplay.rpgworldmod.block;
 import net.dainplay.rpgworldmod.RPGworldMod;
 import net.dainplay.rpgworldmod.block.custom.*;
 import net.dainplay.rpgworldmod.block.entity.ModWoodTypes;
+import net.dainplay.rpgworldmod.effect.ModEffects;
 import net.dainplay.rpgworldmod.world.feature.tree.RieTreeGrower;
 import net.dainplay.rpgworldmod.item.ModCreativeModeTab;
 import net.dainplay.rpgworldmod.item.ModItems;
@@ -70,9 +71,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> POTTED_SHIVERALIS = registerBlockWithoutBlockItem("potted_shiveralis",
             () -> new FlowerPotBlock(ModBlocks.SHIVERALIS.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
     public static final RegistryObject<Block> RPGIROLLE = registerBlockWithoutBlockItem("rpgirolle",
-            () -> new FlowerBlock(MobEffects.SATURATION, 0, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()));
+            () -> new FlowerBlock(MobEffects.SATURATION, 0, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.FUNGUS)));
     public static final RegistryObject<Block> WILD_FAIRAPIER = registerBlock("wild_fairapier",
-            () -> new FlowerBlock(MobEffects.DAMAGE_BOOST, 0, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()) {
+            () -> new FlowerBlock(MobEffects.DAMAGE_BOOST, 8, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()) {
 
                 protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
                 @Override
@@ -80,6 +81,33 @@ public class ModBlocks {
                     return SHAPE;
                 }
             }, ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> MIMOSSA = registerBlock("mimossa",
+            () -> new FlowerBlock(ModEffects.MOSSIOSIS, 16, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion()) {
+                 protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
+                 @Override
+                 public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+                 return SHAPE;
+                }
+            }, ModCreativeModeTab.RPGWORLD_TAB);
+
+    public static final RegistryObject<Block> PARALILY = registerBlockWithoutBlockItem("paralily",
+            () -> new ParalilyBlock(BlockBehaviour.Properties.of(Material.PLANT).instabreak().sound(SoundType.LILY_PAD).noOcclusion()));
+    public static final RegistryObject<Block> POTTED_MIMOSSA = registerBlockWithoutBlockItem("potted_mimossa",
+            () -> new FlowerPotBlock(ModBlocks.MIMOSSA.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
+    public static final RegistryObject<Block> MOSSHROOM = registerBlock("mosshroom",
+            () -> new FlowerBlock(ModEffects.MOSSIOSIS, 16, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.MOSS)) {
+                //protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
+                //@Override
+                        //public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+                    //    return SHAPE;
+                    //}
+            }, ModCreativeModeTab.RPGWORLD_TAB);
+    public static final RegistryObject<Block> POTTED_MOSSHROOM = registerBlockWithoutBlockItem("potted_mosshroom",
+            () -> new FlowerPotBlock(ModBlocks.MOSSHROOM.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
+    public static final RegistryObject<Block> CHEESE_CAP = registerBlockWithoutBlockItem("cheese_cap",
+            () -> new FlowerBlock(MobEffects.SATURATION, 0, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.FUNGUS)));
+    public static final RegistryObject<Block> POTTED_CHEESE_CAP = registerBlockWithoutBlockItem("potted_cheese_cap",
+            () -> new FlowerPotBlock(ModBlocks.CHEESE_CAP.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION).noOcclusion()));
     public static final RegistryObject<Block> FAIRAPIER_PLANT = registerBlockWithoutBlockItem("fairapier_plant",
             () -> new FairapierPlantBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion()));
     public static final RegistryObject<Block> FAIRAPIER_WILTED_PLANT = registerBlockWithoutBlockItem("fairapier_wilted_plant",
@@ -248,6 +276,8 @@ public class ModBlocks {
             () -> new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.RIE));
     public static final RegistryObject<Block> RIE_SIGN = registerBlockWithoutBlockItem("rie_sign",
             () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.RIE));
+    public static final RegistryObject<Block> MINTAL_BLOCK = registerBlock("mintal_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL)), ModCreativeModeTab.RPGWORLD_TAB);
 
     public static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);

@@ -1,7 +1,7 @@
 package net.dainplay.rpgworldmod.item.custom;
 
-import net.dainplay.rpgworldmod.world.entity.ModEntities;
-import net.dainplay.rpgworldmod.world.entity.ProjectruffleArrowEntity;
+import net.dainplay.rpgworldmod.entity.ModEntities;
+import net.dainplay.rpgworldmod.entity.projectile.ProjectruffleArrowEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;

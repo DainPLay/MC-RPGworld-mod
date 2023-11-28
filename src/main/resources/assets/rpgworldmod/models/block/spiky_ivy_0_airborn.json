@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"2": "rpgworldmod:block/spiky_ivy",
-		"particle": "rpgworldmod:block/spiky_ivy_2_below"
+		"particle": "rpgworldmod:block/spiky_ivy_4"
 	},
 	"elements": [
 		{
